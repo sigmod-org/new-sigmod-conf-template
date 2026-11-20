@@ -7,24 +7,24 @@
 # ─────────────────────────────────────────────────────────────
 
 conference:
-  short_name: SIGMOD/PODS 2027
-  year: 2027
+  short_name: SIGMOD/PODS 2028
+  year: 2028
   full_name: ACM SIGMOD/PODS International Conference on Management of Data
-  dates: June 13–18, 2027
-  start: 2027-06-13
-  end: 2027-06-18
-  location: Huntington Beach, California, USA
-  venue: Hyatt Regency Huntington Beach Resort and Spa
+  dates: June 18–23, 2028
+  start: 2028-06-18
+  end: 2028-06-23
+  location: Seoul, South Korea
+  venue: Venue to be announced
   register_link: "#"
-  logo: oval              # oval, cylinder or overlap (assets/logos/<name>-mark.svg)
+  logo: assets/logos/sigmod-pods-oval.svg   # header logo (the footer always shows ACM and SIGMOD/PODS)
   banner: assets/banner.svg   # replace with a photo of the host city, e.g. assets/banner.jpg
   banner_credit: Illustration placeholder for a host-city photo
-  accent_color: "#0f766e"   # one color per year
+  accent_color: "#a61e4d"   # one color per year
 
-announcement: "The **Call for Tutorial Proposals** is out. Proposals are due December 20, 2026. [Read the call](/calls/tutorials/)"
+announcement: "**SIGMOD/PODS 2028** will be held in **Seoul, South Korea**, on June 18–23, 2028. Calls for submissions will be posted here."
 
 # Pages listed here are marked "new" in the menu.
-highlight: [news, calls/tutorials]
+highlight: [news]
 
 # Shorter group names, used by designs with a top menu bar.
 short_names:
@@ -77,7 +77,7 @@ right_menu:
     Conference Venue: participants/venue
     Accommodation: participants/accommodation
     Travel & Visas: participants/travel
-    About Huntington Beach: participants/about-city
+    About Seoul: participants/about-city
     Student Travel Grants: participants/travel-grants
     Childcare: participants/childcare
   Organization:
@@ -103,73 +103,67 @@ right_menu:
     Doctoral Dissertation Award: https://sigmod.org/sigmod-awards/doctoral-dissertation-award/
 
 news:
-  - "The **Call for Tutorial Proposals** is available. Proposals are due December 20, 2026."
-  - "Demonstration track deadlines moved earlier. Submissions are now due **January 11, 2027**. See [Important Dates](/calls/dates/)."
-  - "The conference hotel room block is open. See [Conference Venue](/participants/venue/)."
+  - "SIGMOD/PODS 2028 will take place in **Seoul, South Korea**, on June 18–23, 2028."
+  - "The general chairs are **Wook-Shin Han** and **Kyuseok Shim**. The program committee chairs are **Yannis Velegrakis** and **Rachel Pottinger**."
 
 # Important dates. All deadlines are 23:59 AoE.
+# PLACEHOLDER: these are the 2027 deadlines moved forward one year, to show the layout.
+# Replace them with the 2028 dates, then delete dates_note and dates_note_short.
 # A track either has rounds (one date per round, in order) or a simple list.
-# A period is written  "2026-03-10 to 2026-03-17".
+# A period is written  "2027-03-10 to 2027-03-17".
+dates_note: "**Placeholder dates.** These are the 2027 deadlines moved forward one year. The 2028 calls will be published here."
+dates_note_short: "Placeholder dates until the 2028 calls are out"
 important_dates:
   - track: SIGMOD research papers
     page: calls/sigmod-research
     rounds: [Round 1, Round 2, Round 3, Round 4]
     dates:
-      Abstract & COI declaration: [2026-01-10, 2026-04-10, 2026-07-10, 2026-10-10]
-      Paper submission:           [2026-01-17, 2026-04-17, 2026-07-17, 2026-10-17]
-      Author feedback:            [2026-03-10 to 2026-03-17, 2026-06-10 to 2026-06-17, 2026-09-10 to 2026-09-17, 2026-12-10 to 2026-12-17]
-      Accept / reject / revise:   [2026-04-19, 2026-07-19, 2026-10-19, 2027-01-19]
-      Revised paper due:          [2026-05-19, 2026-08-19, 2026-11-19, 2027-02-19]
-      Final notification:         [2026-06-12, 2026-09-12, 2026-12-12, 2027-03-12]
+      Abstract & COI declaration: [2027-01-10, 2027-04-10, 2027-07-10, 2027-10-10]
+      Paper submission:           [2027-01-17, 2027-04-17, 2027-07-17, 2027-10-17]
+      Author feedback:            [2027-03-10 to 2027-03-17, 2027-06-10 to 2027-06-17, 2027-09-10 to 2027-09-17, 2027-12-10 to 2027-12-17]
+      Accept / reject / revise:   [2027-04-19, 2027-07-19, 2027-10-19, 2028-01-19]
+      Revised paper due:          [2027-05-19, 2027-08-19, 2027-11-19, 2028-02-19]
+      Final notification:         [2027-06-12, 2027-09-12, 2027-12-12, 2028-03-12]
 
   - track: PODS research papers
     page: calls/pods-research
     rounds: [Cycle 1, Cycle 2]
     dates:
-      Abstract submission:   [2026-05-23, 2026-12-03]
-      Full paper submission: [2026-05-30, 2026-12-10]
-      Rebuttal:              [2026-07-29 to 2026-08-01, 2027-01-26 to 2027-01-29]
-      Initial notification:  [2026-08-11, 2027-02-08]
-      Revision due:          [2026-08-25, 2027-02-22]
-      Final notification:    [2026-09-01, 2027-03-01]
+      Abstract submission:   [2027-05-23, 2027-12-03]
+      Full paper submission: [2027-05-30, 2027-12-10]
+      Rebuttal:              [2027-07-29 to 2027-08-01, 2028-01-26 to 2028-01-29]
+      Initial notification:  [2027-08-11, 2028-02-08]
+      Revision due:          [2027-08-25, 2028-02-22]
+      Final notification:    [2027-09-01, 2028-03-01]
 
   - track: Industrial track
     page: calls/industrial
     dates:
-      Paper submission: 2026-11-24
-      Reviews released: 2027-01-26
-      Revision submission: 2027-02-23
-      Notification: 2027-03-04
-      Camera-ready: 2027-03-18
+      Paper submission: 2027-11-24
+      Reviews released: 2028-01-26
+      Revision submission: 2028-02-23
+      Notification: 2028-03-04
+      Camera-ready: 2028-03-18
 
   - track: Tutorials
     page: calls/tutorials
     dates:
-      Proposal submission: 2026-12-20
-      Notification: 2027-02-01
+      Proposal submission: 2027-12-20
+      Notification: 2028-02-01
 
   - track: Demonstrations
     page: calls/demos
     dates:
-      Submission: 2027-01-11
-      COI declaration: 2027-01-12
-      Notification: 2027-03-08
-      Camera-ready: 2027-04-01
+      Submission: 2028-01-11
+      COI declaration: 2028-01-12
+      Notification: 2028-03-08
+      Camera-ready: 2028-04-01
 
 # People. The first four groups appear on the homepage.
 people:
-  SIGMOD General Chairs: [Chen Li (UC Irvine), Cyrus Shahabi (University of Southern California)]
-  SIGMOD Program Chairs: [Sourav S Bhowmick (Nanyang Technological University), Yuanyuan Tian (Microsoft Gray Systems Lab)]
-  PODS General Chair: [Yufei Tao (Chinese University of Hong Kong)]
-  PODS Program Chair: [Dan Olteanu (University of Zurich)]
-  Industrial Program Chairs: [Bailu Ding (Stealth Startup), Divesh Srivastava (AT&T Data Office)]
-  Demonstration Chairs: [Stefanie Scherzinger (University of Passau), Jun Yang (Duke University)]
-  Tutorial Chairs: [Angela Bonifati (Lyon 1 University), Melanie Herschel (NTU Singapore)]
-  Workshop Chairs: [George Fletcher (TU Eindhoven), Sujaya Maiyya (University of Waterloo), Makoto Onizuka (Osaka University)]
-  Panel Chair: [H. V. Jagadish (University of Michigan)]
-  Local Arrangements Chair: [Ibrahim Sabek (University of Southern California)]
-  Student Travel Award Chair: [Jia Zou (Arizona State University)]
-  Web/Information Chair: [Yicong Huang (Databricks / UMass Amherst)]
+  General Chairs: [Wook-Shin Han (POSTECH), Kyuseok Shim (Seoul National University)]
+  Program Committee Chairs: [Yannis Velegrakis (Utrecht University), Rachel Pottinger (University of British Columbia)]
+  Web Chair: [Kyoungmin Kim (KAIST)]
 
 # Sponsors by tier: "Name: https://link". Empty tiers are not shown.
 sponsors:

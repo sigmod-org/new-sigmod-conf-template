@@ -80,10 +80,11 @@ const person = (p) => { const m = String(p).match(/^(.*?)\s*\((.*)\)\s*$/); retu
 const peopleList = (entries) => `<dl class="people">${entries.map(([r, ps]) => `<div><dt>${esc(r)}</dt>${[].concat(ps).map((p) => `<dd>${person(p)}</dd>`).join("")}</div>`).join("")}</dl>`;
 const shortcodes = {
   dates: (arg) => {
+    const note = site.dates_note ? `<p class="datesnote">${inline(site.dates_note)}</p>` : "";
     const tracks = (site.important_dates || []).filter((t) => !arg || t.track.toLowerCase() === arg.toLowerCase());
     if (!tracks.length) return `<p class="warn">No dates found for "${esc(arg)}".</p>`;
-    if (arg) return `<div class="dates-block">${tracks.map(datesFor).join("")}</div>`;
-    return `<div class="dates-block">${tracks.map((t) => `<section class="track"><h2 id="${t.track.toLowerCase().replace(/[^a-z0-9]+/g, "-")}">${esc(t.track)}</h2>${datesFor(t)}${t.page ? `<p class="callink"><a href="${hrefOf(t.page)}">Read the call →</a></p>` : ""}</section>`).join("")}</div>`;
+    if (arg) return `<div class="dates-block">${note}${tracks.map(datesFor).join("")}</div>`;
+    return `<div class="dates-block">${note}${tracks.map((t) => `<section class="track"><h2 id="${t.track.toLowerCase().replace(/[^a-z0-9]+/g, "-")}">${esc(t.track)}</h2>${datesFor(t)}${t.page ? `<p class="callink"><a href="${hrefOf(t.page)}">Read the call →</a></p>` : ""}</section>`).join("")}</div>`;
   },
   news: () => `<ul class="news">${(site.news || []).map((n) => `<li>${inline(n)}</li>`).join("")}</ul>`,
   chairs: () => peopleList(Object.entries(site.people || {}).slice(0, 4)),
@@ -106,14 +107,16 @@ function upcomingBox(n = 4, title = "Upcoming dates") {
     if (!hide) shown++;
     return `<li class="${dcls(m.v)}" ${dattr(m.v)}${hide ? " hidden" : ""}><span><a href="${hrefOf(m.page)}">${esc(shortTrack(m.track))}</a>${m.round ? " · " + esc(m.round) : ""}<br>${esc(m.label)}</span><time datetime="${span(m.v).a}">${fmt(m.v, false)}</time></li>`;
   });
-  return `<div class="upbox"><h2>${esc(title)}</h2><ul class="dlist compact" data-upcoming="${n}">${items.join("")}</ul><p class="none"${shown ? " hidden" : ""}>All submission deadlines have passed.</p><p class="small"><a href="/calls/dates/">All important dates</a> · 23:59 AoE</p></div>`;
+  const note = site.dates_note ? `<p class="small upnote">${esc(site.dates_note_short || "Placeholder dates")}</p>` : "";
+  return `<div class="upbox"><h2>${esc(title)}</h2>${note}<ul class="dlist compact" data-upcoming="${n}">${items.join("")}</ul><p class="none"${shown ? " hidden" : ""}>All submission deadlines have passed.</p><p class="small"><a href="/calls/dates/">All important dates</a> · 23:59 AoE</p></div>`;
 }
 
 /* ---------- logo, inlined so it stays crisp and can appear twice on a page ---------- */
 function logo(suffix = "a") {
-  const file = `assets/logos/${conf.logo || "oval"}-mark.svg`;
+  const file = conf.logo || "assets/logos/sigmod-pods-oval.svg";
   if (!fs.existsSync(file)) return "";
-  return fs.readFileSync(file, "utf8").replace(/<\?xml[^>]*>/, "").replace(/id="([^"]+)"/g, `id="$1-${suffix}"`).replace(/url\(#([^)]+)\)/g, `url(#$1-${suffix})`).replace("<svg", `<svg role="img" aria-label="SIGMOD/PODS logo"`);
+  return fs.readFileSync(file, "utf8").replace(/<\?xml[^>]*>/, "").replace(/<title>[^<]*<\/title>/, "").replace(/ width="\d+" height="\d+"/, "")
+    .replace(/id="([^"]+)"/g, `id="$1-${suffix}"`).replace(/url\(#([^)]+)\)/g, `url(#$1-${suffix})`).replace("<svg", `<svg role="img" aria-label="ACM SIGMOD/PODS"`);
 }
 
 export default function (eleventyConfig) {

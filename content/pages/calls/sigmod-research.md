@@ -2,7 +2,7 @@
 title: SIGMOD research papers
 ---
 
-SIGMOD 2027 invites submissions of original research on all aspects of data management. Accepted papers appear in the *Proceedings of the ACM on Management of Data* (PACMMOD).
+SIGMOD 2028 invites submissions of original research on all aspects of data management. Accepted papers appear in the *Proceedings of the ACM on Management of Data* (PACMMOD).
 
 ## Submission rounds
 

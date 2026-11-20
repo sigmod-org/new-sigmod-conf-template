@@ -55,6 +55,7 @@
   <aside class="rail" aria-label="Upcoming dates">{% if not home %}{% upcoming 5 %}{% endif %}</aside>
 </div>
 
+{% include "_shared/logobar.njk" %}
 <footer class="foot">
   <div class="bar-in">
     <span><b>{{ conf.short_name }}</b> · {{ conf.dates }} · {{ conf.location }}</span>

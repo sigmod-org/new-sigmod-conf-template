@@ -6,12 +6,11 @@ title: Travel & Visas
 
 | Airport | Code | Notes |
 |---|---|---|
-| John Wayne Airport | SNA | Closest to the venue |
-| Long Beach Airport | LGB | |
-| Los Angeles International | LAX | Most international connections |
+| Incheon International Airport | ICN | Most international flights |
+| Gimpo International Airport | GMP | Domestic and some regional flights, closer to central Seoul |
 
-The hotel does not run an airport shuttle. Use a rideshare service, a rental car, or private transportation.
+Directions from the airports to the venue will be posted once the venue is announced.
 
 ## Visas
 
-Visa information and invitation letters will be posted here.
+Check the entry requirements for South Korea well before you travel, including whether you need a visa or an electronic travel authorization. Information about invitation letters will be posted here.

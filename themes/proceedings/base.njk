@@ -45,6 +45,7 @@
   {%- if not isSoon %}<p class="edit">Edit this page: <code>{% editPath page.inputPath %}</code></p>{% endif %}
 </main>
 
+{% include "_shared/logobar.njk" %}
 <footer class="foot">
   <div class="map">
     {%- for grp in nav.all %}

@@ -2,6 +2,6 @@
 title: Demonstrations
 ---
 
-> **Updated:** the submission deadline moved from January 15 to **January 11, 2027**.
+SIGMOD 2028 invites demonstrations of data management systems, tools and prototypes.
 
 {{dates: Demonstrations}}

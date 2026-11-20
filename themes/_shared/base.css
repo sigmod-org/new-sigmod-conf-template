@@ -112,3 +112,18 @@ details.round .dlist li:last-child { border-bottom: 0; }
   .narrow-only { display: none !important; }
   .wide-only { display: block !important; }
 }
+
+/* Logo bar above every footer: ACM left, SIGMOD/PODS right (as on the 2024–2027 sites) */
+.logobar { background: #fff; border-top: 1px solid var(--line); }
+.logobar-in { max-width: 1240px; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.logobar a { display: block; line-height: 0; }
+.lb-acm img { height: 46px; width: auto; }
+.lb-sig img { height: 54px; width: auto; }
+.datesnote, .upnote { color: var(--rust); }
+.datesnote { background: var(--cream); border-left: 3px solid var(--warm); padding: 8px 14px; font-size: 14.5px; }
+.upnote { margin: -2px 0 6px; font-size: 12.5px; }
+@media (max-width: 760px) {
+  .logobar-in { padding: 14px 16px; }
+  .lb-acm img { height: 38px; }
+  .lb-sig img { height: 46px; }
+}

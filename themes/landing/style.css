@@ -24,7 +24,7 @@
 .hero .wrap { position: relative; z-index: 2; padding-top: 64px; padding-bottom: 64px; }
 .hero-txt { max-width: 560px; }
 .hero-title { font: 500 52px/1.05 var(--serif); margin: 0 0 10px; letter-spacing: -.015em; }
-.hero-title em { font-style: normal; color: #9ce1d8; }
+.hero-title em { font-style: normal; color: color-mix(in srgb, var(--accent) 35%, #fff); }
 .hero-full { margin: 0 0 14px; color: #dbe3f0; font-size: 16px; }
 .hero-when { margin: 0 0 22px; font-size: 17px; }
 .hero .cta { margin: 0; display: flex; gap: 10px; flex-wrap: wrap; }

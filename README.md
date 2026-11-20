@@ -2,7 +2,7 @@
 
 A static, lightweight, mobile-friendly website template for the ACM SIGMOD/PODS conference. It follows the menu structure of [2026.sigmod.org](https://2026.sigmod.org/) and the look of [sigmod.org](https://sigmod.org/).
 
-This repository holds **five design proposals** built from the same content (the 2027 conference). The published site's front page compares them.
+This repository holds **five design proposals** built from the same content (SIGMOD/PODS 2028, Seoul). The published site's front page compares them.
 
 | # | Proposal | Idea |
 |---|---|---|
@@ -64,12 +64,13 @@ npm run build
 python3 -m http.server 8765 -d _site
 ```
 
-Then open http://localhost:8765/. Add `?today=2027-06-15` to any page to see how dates look on another day.
+Then open http://localhost:8765/. Add `?today=2028-06-20` to any page to see how dates look on another day.
 
 ## Other folders
 
-- `assets/`: the logo marks, the placeholder banner (replace with a photo of the host city) and other static files.
+- `assets/`: the logos, the placeholder banner (replace with a photo of the host city) and other static files.
+- `assets/logos/`: clean redraws of the SIGMOD/PODS logo (`sigmod-pods.svg` as on the 2027 site, `sigmod-pods-oval.svg` without the blue tile) and the ACM logo after the sigmod.org version (`acm.svg` with dark text, `acm-white.svg` for dark backgrounds, `acm-mark.svg`), with high-resolution PNG exports. `scripts/make-logos.mjs` regenerates them.
 - `gallery/`: the comparison page published at the site root.
 - `explorations/`: the earlier rounds of this exploration (options A–E and the SIGMOD/PODS logo concepts). These render in the browser and are not part of the template.
 
-Content comes from 2027.sigmod.org as of November 2026.
+The 2028 conference details (Seoul, June 18–23, 2028, and the chairs) are real. The submission deadlines are placeholders: the 2027 dates moved forward one year, marked as such on the site.

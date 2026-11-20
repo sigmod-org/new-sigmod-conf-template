@@ -66,9 +66,10 @@
   </aside>
 </div>
 
+{% include "_shared/logobar.njk" %}
 <footer class="foot">
   <div class="wrap">
-    <div class="fl"><span class="logo">{% logo "f" %}</span><div><b>{{ conf.short_name }}</b><br>{{ conf.dates }} · {{ conf.location }}</div></div>
+    <div class="fl"><div><b>{{ conf.short_name }}</b><br>{{ conf.dates }} · {{ conf.location }}</div></div>
     <div class="fr">{{ m.foot_links(site) }}</div>
   </div>
 </footer>
