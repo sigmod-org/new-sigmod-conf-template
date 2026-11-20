@@ -1,0 +1,57 @@
+{%- import "_shared/macros.njk" as m -%}
+{%- set home = page.url == "/" -%}
+{%- set g = page.url | groupOf -%}
+<!doctype html>
+<html lang="en">
+<head>
+{% include "_shared/head.njk" %}
+</head>
+<body class="theme-proceedings">
+<a class="skip" href="#main">Skip to content</a>
+{% if site.announcement %}<div class="announce"><div class="col">{{ site.announcement | inline | safe }}</div></div>{% endif %}
+
+<header class="head">
+  <div class="col">
+    <a class="brand" href="/"><span class="logo">{% logo "h" %}</span></a>
+    <p class="name"><a href="/">{{ conf.short_name | yearEm | safe }}</a></p>
+    <p class="full">{{ conf.full_name }}</p>
+    <p class="when">{{ conf.dates }} <span>·</span> {{ conf.location }}</p>
+  </div>
+  <nav class="topnav" aria-label="Sections">
+    <a href="/"{% if home %} aria-current="page"{% endif %}>Home</a>
+    {%- for grp in nav.all %}{% if not loop.first %}
+    <a href="{{ grp.first.href }}"{% if grp == g %} class="cur"{% endif %}>{{ grp.short }}</a>
+    {%- endif %}{% endfor %}
+    <a class="reg" href="{{ conf.register_link }}">Register</a>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1" class="col">
+  {%- if home %}
+  {% upcoming 4, "Next deadlines" %}
+  {%- else %}
+  {{ m.crumbs(page.url, title) }}
+  {%- endif %}
+  <h1 class="title">{{ title }}</h1>
+  {%- if g and not home %}
+  <nav class="siblings" aria-label="In {{ g.name }}"><b>In {{ g.name }}:</b>
+    {%- for i in g.items %}
+      {%- if i.children %}{% for c in i.children %} <a href="{{ c.href }}"{% if c.href == page.url %} aria-current="page"{% endif %}>{{ i.title }} ({{ c.title }})</a>{% endfor %}
+      {%- else %} <a href="{{ i.href }}"{% if i.href == page.url %} aria-current="page"{% endif %}>{{ i.title }}</a>{% endif %}
+    {%- endfor %}
+  </nav>
+  {%- endif %}
+  <div class="prose">{{ content | safe }}</div>
+  {%- if not isSoon %}<p class="edit">Edit this page: <code>{% editPath page.inputPath %}</code></p>{% endif %}
+</main>
+
+<footer class="foot">
+  <div class="map">
+    {%- for grp in nav.all %}
+    <section><h2>{{ grp.name }}</h2>{{ m.items(grp.items, page.url) }}</section>
+    {%- endfor %}
+  </div>
+  <p class="colophon"><b>{{ conf.short_name }}</b> · {{ conf.dates }} · {{ conf.location }}<br>{{ m.foot_links(site) }}</p>
+</footer>
+</body>
+</html>

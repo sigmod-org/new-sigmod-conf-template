@@ -1,0 +1,41 @@
+{#- Pieces shared by every design. Import with:  {% import "_shared/macros.njk" as m %} -#}
+
+{#- A menu list. Items with children (e.g. Organizers) become a nested list. -#}
+{% macro items(list, url) -%}
+<ul>
+{%- for i in list %}
+  {%- if i.children %}
+  <li class="parent"><span>{{ i.title }}</span>{{ items(i.children, url) }}</li>
+  {%- else %}
+  <li><a href="{{ i.href }}"{% if i.href == url %} aria-current="page"{% endif %}{% if i.external %} rel="noopener"{% endif %}>{{ i.title }}{% if i.external %} <span class="ext" aria-label="external site">↗</span>{% endif %}{% if i.isNew %} <span class="new">new</span>{% endif %}</a></li>
+  {%- endif %}
+{%- endfor %}
+</ul>
+{%- endmacro %}
+
+{#- Every group as a <details>, the current one open: used for phone menus. -#}
+{% macro drawer(groups, url, conf) -%}
+{%- set cur = url | groupOf -%}
+{%- for g in groups %}
+<details{% if g == cur or (not cur and loop.first) %} open{% endif %}><summary>{{ g.name }}</summary>{{ items(g.items, url) }}</details>
+{%- endfor %}
+<p class="drawer-cta"><a class="btn" href="{{ conf.register_link }}">Register</a></p>
+{%- endmacro %}
+
+{% macro crumbs(url, title) -%}
+{%- set g = url | groupOf -%}
+{%- if url != "/" %}<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a>{% if g %} <span>›</span> {{ g.name }}{% endif %} <span>›</span> {{ title }}</nav>{% endif %}
+{%- endmacro %}
+
+{#- Page title + text + "edit this page". -#}
+{% macro body(title, content, page, isSoon) -%}
+<h1 class="title">{{ title }}</h1>
+<div class="prose">{{ content | safe }}</div>
+{%- if not isSoon %}
+<p class="edit">Edit this page: <code>{% editPath page.inputPath %}</code></p>
+{%- endif %}
+{%- endmacro %}
+
+{% macro foot_links(site) -%}
+<a href="https://sigmod.org/">ACM SIGMOD</a> · <a href="https://sigmod.org/pods/">PODS</a>{% for name, url in site.footer.social %} · <a href="{{ url }}">{{ name }}</a>{% endfor %}
+{%- endmacro %}

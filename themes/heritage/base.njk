@@ -1,0 +1,62 @@
+{%- import "_shared/macros.njk" as m -%}
+{%- set home = page.url == "/" -%}
+{%- set g = page.url | groupOf -%}
+<!doctype html>
+<html lang="en">
+<head>
+{% include "_shared/head.njk" %}
+</head>
+<body class="theme-heritage">
+<a class="skip" href="#main">Skip to content</a>
+{% if site.announcement %}<div class="announce"><div class="wrap">{{ site.announcement | inline | safe }}</div></div>{% endif %}
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="logo">{% logo "h" %}</span>
+      <span class="txt"><span class="name">{{ conf.short_name | yearEm | safe }}</span><span class="full">{{ conf.full_name }}</span></span>
+    </a>
+    <div class="when"><b>{{ conf.dates }}</b><span>{{ conf.location }}</span></div>
+    <a class="btn reg" href="{{ conf.register_link }}">Register</a>
+    <button class="menubtn" data-menu aria-expanded="false" aria-controls="drawer">Menu</button>
+  </div>
+</header>
+<nav class="drawer" id="drawer" aria-label="Site"><div class="wrap">{{ m.drawer(nav.all, page.url, conf) }}</div></nav>
+
+<div class="banner{% if home %} tall{% endif %}">
+  <img src="/{{ conf.banner }}" alt="">
+  {% if conf.banner_credit %}<span class="cap">{{ conf.banner_credit }}</span>{% endif %}
+</div>
+
+<div class="wrap page">
+  <nav class="col left" aria-label="Conference">
+    {%- for grp in nav.left %}
+    <section class="grp{% if grp == g %} cur{% endif %}"><h2>{{ grp.name }}</h2>{{ m.items(grp.items, page.url) }}</section>
+    {%- endfor %}
+  </nav>
+
+  <main id="main" tabindex="-1">
+    {{ m.crumbs(page.url, title) }}
+    {%- if g and not home %}
+    <details class="insection"><summary>In <b>{{ g.name }}</b></summary>{{ m.items(g.items, page.url) }}</details>
+    {%- endif %}
+    {%- if home %}<div class="phone-only">{% upcoming 4 %}</div>{% endif %}
+    {{ m.body(title, content, page, isSoon) }}
+  </main>
+
+  <aside class="col right" aria-label="Participants, organization and calls">
+    {% upcoming 4 %}
+    {%- for grp in nav.right %}
+    <section class="grp{% if grp == g %} cur{% endif %}"><h2>{{ grp.name }}</h2>{{ m.items(grp.items, page.url) }}</section>
+    {%- endfor %}
+  </aside>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="fl"><span class="logo">{% logo "f" %}</span><div><b>{{ conf.short_name }}</b><br>{{ conf.full_name }}<br>{{ conf.dates }} · {{ conf.location }}</div></div>
+    <div class="fr">{{ m.foot_links(site) }}</div>
+  </div>
+</footer>
+</body>
+</html>

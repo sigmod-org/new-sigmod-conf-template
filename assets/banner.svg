@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 400" preserveAspectRatio="xMidYMid slice">
+  <!-- Placeholder banner: a pier at sunset. Replace with a photo of the host city (set conference.banner in content/site.yml). -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6f2f0"/><stop offset=".7" stop-color="#fdf1e4"/><stop offset="1" stop-color="#fde6cf"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9ccfc8"/><stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="400" fill="url(#sky)"/>
+  <circle cx="1130" cy="232" r="70" fill="#f08a4b" fill-opacity=".85"/>
+  <circle cx="1130" cy="232" r="110" fill="#f08a4b" fill-opacity=".12"/>
+  <rect y="240" width="1600" height="160" fill="url(#sea)"/>
+  <g fill="none" stroke="#fff" stroke-linecap="round">
+    <path d="M60 268 H260 M420 262 H520 M980 270 H1280 M1380 262 H1520" stroke-opacity=".55" stroke-width="2"/>
+    <path d="M140 300 H420 M700 292 H900 M1060 304 H1440" stroke-opacity=".35" stroke-width="3"/>
+    <path d="M0 345 H260 M480 338 H820 M1180 352 H1600" stroke-opacity=".25" stroke-width="4"/>
+  </g>
+  <rect x="1090" y="250" width="80" height="8" fill="#fde6cf" fill-opacity=".55"/>
+  <rect x="1100" y="270" width="60" height="6" fill="#fde6cf" fill-opacity=".4"/>
+  <!-- pier -->
+  <g fill="#1e3a5f">
+    <rect x="0" y="214" width="900" height="9"/>
+    <rect x="0" y="206" width="900" height="2.5"/>
+    <g>
+      <rect x="40" y="223" width="5" height="40"/><rect x="120" y="223" width="5" height="38"/><rect x="200" y="223" width="5" height="36"/>
+      <rect x="280" y="223" width="5" height="34"/><rect x="360" y="223" width="5" height="32"/><rect x="440" y="223" width="5" height="30"/>
+      <rect x="520" y="223" width="5" height="28"/><rect x="600" y="223" width="5" height="26"/><rect x="680" y="223" width="5" height="24"/>
+      <rect x="760" y="223" width="5" height="22"/><rect x="840" y="223" width="5" height="20"/>
+    </g>
+    <path d="M820 214 V188 H868 V178 L884 170 L900 178 V214 Z"/>
+    <rect x="896" y="196" width="40" height="18"/>
+  </g>
+</svg>

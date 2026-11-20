@@ -1,0 +1,85 @@
+/* Proposal 1 — Heritage.
+   The 2026 site's structure: banner, left menu, page, right menu.
+   Wide screens: 3 columns. Laptops: both menus stacked on the left. Phones: one column + Menu drawer. */
+.wrap { max-width: 1320px; }
+
+.masthead { border-bottom: 1px solid var(--line); background: #fff; }
+.masthead .wrap { display: flex; align-items: center; gap: 24px; padding-top: 16px; padding-bottom: 16px; }
+.brand { display: flex; align-items: center; gap: 16px; text-decoration: none; color: var(--ink); margin-right: auto; min-width: 0; }
+.brand .logo svg { height: 56px; width: auto; display: block; }
+.brand .name { display: block; font: 500 32px/1.05 var(--serif); letter-spacing: -.01em; white-space: nowrap; }
+.brand .name em { font-style: normal; color: var(--accent); }
+.brand .full { display: block; font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+.when { text-align: right; font-size: 14.5px; line-height: 1.4; }
+.when b { display: block; color: var(--ink); font-weight: 600; }
+.when span { color: var(--muted); }
+
+.banner { height: 120px; position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background: var(--bg2); }
+.banner.tall { height: 260px; }
+.banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.banner .cap { position: absolute; right: 16px; bottom: 10px; font-size: 12px; color: var(--muted); background: rgba(255,255,255,.85); padding: 2px 8px; border-radius: 4px; }
+
+.page { display: grid; grid-template-columns: 230px minmax(0, 1fr) 240px; gap: 48px; padding-top: 32px; padding-bottom: 72px; align-items: start; min-height: 55vh; }
+.col { font-size: 14.5px; }
+.col .upbox { margin-bottom: 26px; }
+.grp { margin-bottom: 26px; }
+.grp h2 { font: 600 15px var(--sans); color: var(--navy); margin: 0 0 6px; padding-bottom: 6px; border-bottom: 2px solid var(--navy); }
+.grp.cur h2 { color: var(--accent); border-bottom-color: var(--accent); }
+.col ul { list-style: none; margin: 0; padding: 0; }
+.grp li a { display: block; padding: 5px 8px; margin: 0 -8px; border-radius: 5px; color: var(--body); text-decoration: none; line-height: 1.35; }
+.grp li a:hover { background: var(--bg2); color: var(--navy); }
+.grp li a[aria-current] { background: var(--bg3); color: var(--navy); font-weight: 600; box-shadow: inset 3px 0 0 var(--navy); }
+.grp .parent > span { padding: 5px 0 2px; }
+.grp .parent ul { padding-left: 12px; border-left: 1px solid var(--line); margin: 0 0 4px 2px; }
+
+.drawer, .insection, .phone-only { display: none; }
+
+.foot { background: #0f172a; color: #94a3b8; font-size: 14px; padding: 28px 0; }
+.foot .wrap { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.foot .fl { display: flex; gap: 16px; align-items: center; }
+.foot .logo { background: #fff; border-radius: 10px; padding: 6px 8px; display: inline-flex; }
+.foot .logo svg { height: 38px; width: auto; display: block; }
+.foot b { color: #fff; }
+.foot a { color: #dbe3f0; }
+
+@media (max-width: 1180px) {
+  .page { grid-template-columns: 240px minmax(0, 1fr); grid-template-rows: auto 1fr; }
+  .left { grid-column: 1; grid-row: 1; }
+  .right { grid-column: 1; grid-row: 2; }
+  main { grid-column: 2; grid-row: 1 / span 2; }
+  .when { display: none; }
+}
+@media (max-width: 860px) {
+  .wrap { padding: 0 16px; }
+  .page { display: block; padding-top: 20px; }
+  .col { display: none; }
+  .menubtn { display: block; }
+  .masthead .wrap { gap: 12px; padding-top: 12px; padding-bottom: 12px; }
+  .masthead .reg { display: none; }
+  .brand { gap: 10px; }
+  .brand .logo svg { height: 38px; }
+  .brand .name { font-size: 23px; }
+  .brand .full { font-size: 12px; }
+  .banner, .banner.tall { height: 96px; }
+  .banner .cap { display: none; }
+  .menu-open .drawer { display: block; background: var(--bg2); border-bottom: 1px solid var(--line); }
+  .drawer .wrap { padding-top: 8px; padding-bottom: 16px; }
+  .drawer details { border-bottom: 1px solid var(--line); }
+  .drawer summary { padding: 12px 0; font-weight: 600; color: var(--navy); cursor: pointer; }
+  .drawer ul { list-style: none; margin: 0 0 10px; padding: 0 0 0 4px; }
+  .drawer li a { display: block; padding: 7px 0; color: var(--ink); text-decoration: none; }
+  .drawer li a[aria-current] { color: var(--navy); font-weight: 600; }
+  .drawer .parent > span { padding: 7px 0 2px; color: var(--muted); font-size: 14px; font-weight: 400; }
+  .drawer .parent ul { padding-left: 14px; }
+  .drawer-cta { margin: 14px 0 0; }
+  .insection { display: block; margin: 0 0 16px; border: 1px solid var(--line); border-radius: 8px; font-size: 15px; }
+  .insection summary { padding: 10px 14px; cursor: pointer; color: var(--muted); }
+  .insection summary b { color: var(--ink); }
+  .insection ul { list-style: none; margin: 0; padding: 4px 0 8px; border-top: 1px solid var(--line); }
+  .insection li a { display: block; padding: 7px 14px; text-decoration: none; color: var(--ink); }
+  .insection li a[aria-current] { color: var(--navy); font-weight: 600; box-shadow: inset 3px 0 0 var(--navy); }
+  .insection .parent > span { padding: 7px 14px 0; color: var(--muted); font-size: 14px; font-weight: 400; }
+  .insection .parent ul { padding-left: 14px; border: 0; }
+  .phone-only { display: block; margin-bottom: 20px; }
+}
+@media (max-width: 420px) { .brand .full { display: none; } .brand .name { font-size: 20px; } .brand .logo svg { height: 32px; } }

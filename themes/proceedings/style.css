@@ -1,0 +1,52 @@
+/* Proposal 5 — Proceedings.
+   The lightest design: one centered column, a printed-programme header, a single line of section links,
+   and the full site map in the footer. No banner image and no hidden menus; works the same on phones. */
+.col { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+.announce .col { padding-top: 8px; padding-bottom: 8px; }
+
+.head { text-align: center; padding-top: 34px; border-bottom: 1px solid var(--ink); position: relative; }
+.head::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; border-bottom: 1px solid var(--ink); }
+.brand .logo svg { height: 52px; width: auto; display: inline-block; }
+.name { margin: 10px 0 4px; font: 500 40px/1.1 var(--serif); letter-spacing: -.01em; }
+.name a { color: var(--ink); text-decoration: none; }
+.name em { font-style: normal; color: var(--accent); }
+.full { margin: 0 0 6px; font-size: 14.5px; color: var(--muted); }
+.when { margin: 0 0 20px; font-variant: small-caps; letter-spacing: .06em; font-size: 16px; color: var(--ink); }
+.when span { color: var(--muted); }
+.topnav { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px 22px; padding: 10px 24px 12px; border-top: 1px solid var(--line); font-size: 15px; }
+.topnav a { color: var(--body); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+.topnav a:hover { color: var(--navy); }
+.topnav a.cur, .topnav a[aria-current] { color: var(--ink); font-weight: 600; border-bottom-color: var(--accent); }
+.topnav .reg { color: var(--navy); font-weight: 600; }
+
+main { padding-top: 36px; padding-bottom: 64px; min-height: 45vh; }
+main > .upbox { margin-bottom: 32px; border-color: #d6dae0; }
+.title { text-align: left; }
+.siblings { margin: -6px 0 28px; padding: 10px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 14.5px; line-height: 1.9; color: var(--muted); }
+.siblings b { color: var(--ink); font-weight: 600; margin-right: 4px; }
+.siblings a { margin-right: 12px; white-space: nowrap; }
+.siblings a[aria-current] { color: var(--ink); font-weight: 600; text-decoration: none; }
+
+.foot { border-top: 1px solid var(--line); background: var(--bg2); padding: 36px 24px 28px; font-size: 14px; }
+.map { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 32px; }
+.map h2 { font: 600 13px var(--sans); text-transform: uppercase; letter-spacing: .06em; color: var(--ink); margin: 0 0 6px; }
+.map ul { list-style: none; margin: 0; padding: 0; }
+.map li a { display: block; padding: 2px 0; color: var(--body); text-decoration: none; line-height: 1.45; }
+.map li a:hover { color: var(--navy); text-decoration: underline; }
+.map li a[aria-current] { color: var(--navy); font-weight: 600; }
+.map .parent > span { font-weight: 400; color: var(--muted); padding-top: 2px; }
+.map .parent ul { padding-left: 12px; }
+.colophon { max-width: 1100px; margin: 28px auto 0; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); text-align: center; line-height: 1.8; }
+.colophon b { color: var(--ink); }
+
+@media (max-width: 900px) { .map { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .col { padding: 0 16px; }
+  .head { padding-top: 22px; }
+  .brand .logo svg { height: 40px; }
+  .name { font-size: 30px; }
+  .full { font-size: 13px; padding: 0 16px; }
+  .topnav { gap: 2px 16px; padding: 10px 16px 12px; font-size: 14.5px; }
+  .foot { padding: 28px 16px 24px; }
+}
+@media (max-width: 480px) { .map { grid-template-columns: minmax(0, 1fr); } }

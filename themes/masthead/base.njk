@@ -1,0 +1,76 @@
+{%- import "_shared/macros.njk" as m -%}
+{%- set home = page.url == "/" -%}
+{%- set g = page.url | groupOf -%}
+<!doctype html>
+<html lang="en">
+<head>
+{% include "_shared/head.njk" %}
+</head>
+<body class="theme-masthead{% if home %} is-home{% endif %}">
+<a class="skip" href="#main">Skip to content</a>
+<div class="utility"><div class="wrap">
+  <span><a href="https://sigmod.org/">ACM SIGMOD</a> · <a href="https://sigmod.org/pods/">PODS</a></span>
+  <span class="u-when">{{ conf.dates }} · {{ conf.location }}</span>
+</div></div>
+{% if site.announcement %}<div class="announce"><div class="wrap">{{ site.announcement | inline | safe }}</div></div>{% endif %}
+
+<header class="masthead">
+  <div class="wrap top">
+    <a class="brand" href="/">
+      <span class="logo">{% logo "h" %}</span>
+      <span class="txt"><span class="name">{{ conf.short_name | yearEm | safe }}</span><span class="full">{{ conf.full_name }}</span></span>
+    </a>
+    <a class="btn reg" href="{{ conf.register_link }}">Register</a>
+    <button class="menubtn" data-menu aria-expanded="false" aria-controls="drawer">Menu</button>
+  </div>
+  <nav class="mainnav" aria-label="Site">
+    <ul class="wrap">
+      <li class="{% if home %}cur{% endif %}"><a class="top-a" href="/"{% if home %} aria-current="page"{% endif %}>Home</a></li>
+      {%- for grp in nav.all %}{% if not loop.first %}
+      <li class="has-dd{% if grp == g %} cur{% endif %}">
+        <a class="top-a" href="{{ grp.first.href }}">{{ grp.short }}</a>
+        <div class="dd"><p class="dd-h">{{ grp.name }}</p>{{ m.items(grp.items, page.url) }}</div>
+      </li>
+      {%- endif %}{% endfor %}
+    </ul>
+  </nav>
+</header>
+<nav class="drawer" id="drawer" aria-label="Site (phone)"><div class="wrap">{{ m.drawer(nav.all, page.url, conf) }}</div></nav>
+
+{% if home %}
+<section class="hero">
+  <img src="/{{ conf.banner }}" alt="">
+  <div class="wrap">
+    <div class="card">
+      <p class="eyebrow">{{ conf.dates }}</p>
+      <p class="where">{{ conf.location }}</p>
+      <p class="venue">{{ conf.venue }}</p>
+      <p class="cta"><a class="btn" href="{{ conf.register_link }}">Register</a> <a class="btn ghost" href="/calls/dates/">Important dates</a></p>
+    </div>
+  </div>
+</section>
+{% else %}
+<div class="pagehead"><div class="wrap">{{ m.crumbs(page.url, title) }}</div></div>
+{% endif %}
+
+<div class="wrap page">
+  <main id="main" tabindex="-1">
+    {%- if home %}<div class="phone-only">{% upcoming 3 %}</div>{% endif %}
+    {{ m.body(title, content, page, isSoon) }}
+  </main>
+  <aside class="side">
+    {%- if g and not home %}
+    <section class="insec"><h2>{{ g.name }}</h2>{{ m.items(g.items, page.url) }}</section>
+    {%- endif %}
+    {% upcoming 5 %}
+  </aside>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="fl"><span class="logo">{% logo "f" %}</span><div><b>{{ conf.short_name }}</b><br>{{ conf.dates }} · {{ conf.location }}</div></div>
+    <div class="fr">{{ m.foot_links(site) }}</div>
+  </div>
+</footer>
+</body>
+</html>

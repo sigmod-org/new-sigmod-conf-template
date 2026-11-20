@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" role="img" aria-label="SIGMOD/PODS">
+  <defs><clipPath id="ovalm-clip"><ellipse cx="120" cy="60" rx="116" ry="56"/></clipPath></defs>
+  <g clip-path="url(#ovalm-clip)">
+    <rect width="240" height="120" fill="#d7e4fb"/>
+    <path d="M0 120 V80 C52 48 104 96 156 64 C192 42 216 32 240 28 V120 Z" fill="#1f4fa3"/>
+    <path d="M0 80 C52 48 104 96 156 64 C192 42 216 32 240 28" fill="none" stroke="#ffffff" stroke-width="5"/>
+  </g>
+</svg>

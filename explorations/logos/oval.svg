@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" role="img" aria-label="SIGMOD/PODS">
+  <defs><clipPath id="oval-clip"><ellipse cx="120" cy="60" rx="116" ry="56"/></clipPath></defs>
+  <g clip-path="url(#oval-clip)">
+    <rect width="240" height="120" fill="#d7e4fb"/>
+    <path d="M0 120 V80 C52 48 104 96 156 64 C192 42 216 32 240 28 V120 Z" fill="#1f4fa3"/>
+    <path d="M0 80 C52 48 104 96 156 64 C192 42 216 32 240 28" fill="none" stroke="#ffffff" stroke-width="3"/>
+  </g>
+  <text x="30" y="55" textLength="108" lengthAdjust="spacingAndGlyphs" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="25" fill="#163a78">SIGMOD</text>
+  <text x="128" y="99" textLength="66" lengthAdjust="spacingAndGlyphs" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="23" fill="#ffffff">PODS</text>
+</svg>

@@ -1,0 +1,172 @@
+# ─────────────────────────────────────────────────────────────
+#  SIGMOD/PODS conference site: settings for one year.
+#  Menus follow the 2026 site (2026.sigmod.org): five groups on the
+#  left, three on the right. Page text lives in content/pages/*.md.
+#  To hide a menu item until it is ready, put  #  in front of its line.
+# ─────────────────────────────────────────────────────────────
+
+conference:
+  short_name: SIGMOD/PODS 2027
+  year: 2027
+  full_name: ACM SIGMOD/PODS International Conference on Management of Data
+  dates: June 13–18, 2027
+  start: 2027-06-13
+  end: 2027-06-18
+  location: Huntington Beach, California, USA
+  venue: Hyatt Regency Huntington Beach Resort and Spa
+  register_link: "#"
+  logo: ../logos/oval-mark.svg   # same file every year
+  accent_color: "#0f766e"         # one color per year
+
+announcement: "The **Call for Tutorial Proposals** is out. Proposals are due December 20, 2026. [Read the call](?p=calls/tutorials)"
+
+# Pages listed here are marked "new" in the menu.
+highlight: [news, calls/tutorials]
+
+left_menu:
+  Welcome:
+    Homepage: home
+    News: news
+  Program:
+    Program Overview: program/overview
+    SIGMOD Detailed Program: program/sigmod-detailed
+    PODS Detailed Program: program/pods-detailed
+    Plenary Poster Sessions: program/posters
+    Program Brochure: program/brochure
+    Venue Map: program/venue-map
+  Special Events:
+    Joint SIGMOD/PODS Warmup Event: events/warmup
+    New Researcher Symposium: events/new-researchers
+    Mentorship Program: events/mentorship
+    DEI Events: events/dei
+    Sponsor Talks: events/sponsor-talks
+    Cultural Program: events/cultural
+  SIGMOD Program:
+    Keynotes: sigmod/keynotes
+    Invited Talks: sigmod/invited-talks
+    Panels: sigmod/panels
+    Tutorials: sigmod/tutorials
+    Workshops: sigmod/workshops
+    Accepted Papers: sigmod/papers
+    Accepted Demos: sigmod/demos
+    Accepted Industry Papers: sigmod/industry-papers
+    Awards: sigmod/awards
+  PODS Program:
+    Keynote Talk: pods/keynote
+    Invited Tutorials: pods/tutorials
+    Gems of PODS: pods/gems
+    Accepted Papers: pods/papers
+    Awards: pods/awards
+
+right_menu:
+  Participant Information:
+    Registration: participants/registration
+    Day Pass: participants/day-pass
+    Banquet & Meal Tickets: participants/banquet
+    Conference Venue: participants/venue
+    Accommodation: participants/accommodation
+    Travel & Visas: participants/travel
+    About Huntington Beach: participants/about-city
+    Student Travel Grants: participants/travel-grants
+    Childcare: participants/childcare
+  Organization:
+    Organizers:
+      Conference: org/conference
+      SIGMOD: org/sigmod
+      PODS: org/pods
+    SIGMOD PC: org/sigmod-pc
+    PODS PC: org/pods-pc
+    SIGMOD Industry PC: org/industry-pc
+    SIGMOD Demo PC: org/demo-pc
+    Sponsor Opportunities: org/sponsor-opportunities
+    ACM SIGMOD Online: https://sigmod.org/
+  Calls for Submissions:
+    Important Dates: calls/dates
+    SIGMOD Research Papers: calls/sigmod-research
+    PODS Research Papers: calls/pods-research
+    SIGMOD Industrial Track: calls/industrial
+    SIGMOD Demonstrations: calls/demos
+    SIGMOD Workshop Proposals: calls/workshops
+    SIGMOD Tutorial Proposals: calls/tutorials
+    SIGMOD Award Nominations: calls/awards
+    Doctoral Dissertation Award: https://sigmod.org/sigmod-awards/doctoral-dissertation-award/
+
+news:
+  - "The **Call for Tutorial Proposals** is available. Proposals are due December 20, 2026."
+  - "Demonstration track deadlines moved earlier. Submissions are now due **January 11, 2027**. See [Important Dates](?p=calls/dates)."
+  - "The conference hotel room block is open. See [Conference Venue](?p=participants/venue)."
+
+# Important dates. All deadlines are 23:59 AoE.
+# A track either has rounds (one date per round, in order) or a simple list.
+# A period is written  "2026-03-10 to 2026-03-17".
+important_dates:
+  - track: SIGMOD research papers
+    page: calls/sigmod-research
+    rounds: [Round 1, Round 2, Round 3, Round 4]
+    dates:
+      Abstract & COI declaration: [2026-01-10, 2026-04-10, 2026-07-10, 2026-10-10]
+      Paper submission:           [2026-01-17, 2026-04-17, 2026-07-17, 2026-10-17]
+      Author feedback:            [2026-03-10 to 2026-03-17, 2026-06-10 to 2026-06-17, 2026-09-10 to 2026-09-17, 2026-12-10 to 2026-12-17]
+      Accept / reject / revise:   [2026-04-19, 2026-07-19, 2026-10-19, 2027-01-19]
+      Revised paper due:          [2026-05-19, 2026-08-19, 2026-11-19, 2027-02-19]
+      Final notification:         [2026-06-12, 2026-09-12, 2026-12-12, 2027-03-12]
+
+  - track: PODS research papers
+    page: calls/pods-research
+    rounds: [Cycle 1, Cycle 2]
+    dates:
+      Abstract submission:   [2026-05-23, 2026-12-03]
+      Full paper submission: [2026-05-30, 2026-12-10]
+      Rebuttal:              [2026-07-29 to 2026-08-01, 2027-01-26 to 2027-01-29]
+      Initial notification:  [2026-08-11, 2027-02-08]
+      Revision due:          [2026-08-25, 2027-02-22]
+      Final notification:    [2026-09-01, 2027-03-01]
+
+  - track: Industrial track
+    page: calls/industrial
+    dates:
+      Paper submission: 2026-11-24
+      Reviews released: 2027-01-26
+      Revision submission: 2027-02-23
+      Notification: 2027-03-04
+      Camera-ready: 2027-03-18
+
+  - track: Tutorials
+    page: calls/tutorials
+    dates:
+      Proposal submission: 2026-12-20
+      Notification: 2027-02-01
+
+  - track: Demonstrations
+    page: calls/demos
+    dates:
+      Submission: 2027-01-11
+      COI declaration: 2027-01-12
+      Notification: 2027-03-08
+      Camera-ready: 2027-04-01
+
+# People. The first four groups appear on the homepage.
+people:
+  SIGMOD General Chairs: [Chen Li (UC Irvine), Cyrus Shahabi (University of Southern California)]
+  SIGMOD Program Chairs: [Sourav S Bhowmick (Nanyang Technological University), Yuanyuan Tian (Microsoft Gray Systems Lab)]
+  PODS General Chair: [Yufei Tao (Chinese University of Hong Kong)]
+  PODS Program Chair: [Dan Olteanu (University of Zurich)]
+  Industrial Program Chairs: [Bailu Ding (Stealth Startup), Divesh Srivastava (AT&T Data Office)]
+  Demonstration Chairs: [Stefanie Scherzinger (University of Passau), Jun Yang (Duke University)]
+  Tutorial Chairs: [Angela Bonifati (Lyon 1 University), Melanie Herschel (NTU Singapore)]
+  Workshop Chairs: [George Fletcher (TU Eindhoven), Sujaya Maiyya (University of Waterloo), Makoto Onizuka (Osaka University)]
+  Panel Chair: [H. V. Jagadish (University of Michigan)]
+  Local Arrangements Chair: [Ibrahim Sabek (University of Southern California)]
+  Student Travel Award Chair: [Jia Zou (Arizona State University)]
+  Web/Information Chair: [Yicong Huang (Databricks / UMass Amherst)]
+
+# Sponsors by tier: "Name: https://link". Empty tiers are not shown.
+sponsors:
+  Diamond: {}
+  Platinum: {}
+  Gold: {}
+
+footer:
+  social:
+    X: https://x.com/SIGMODConf
+    LinkedIn: "#"
