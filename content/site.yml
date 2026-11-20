@@ -104,7 +104,7 @@ right_menu:
 
 news:
   - "SIGMOD/PODS 2028 will take place in **Seoul, South Korea**, on June 18–23, 2028."
-  - "The general chairs are **Wook-Shin Han** and **Kyuseok Shim**. The program committee chairs are **Yannis Velegrakis** and **Rachel Pottinger**."
+  - "The general chairs are **Wook-Shin Han** and **Kyuseok Shim**. The SIGMOD program chairs are **Yannis Velegrakis** and **Rachel Pottinger**."
 
 # Important dates. All deadlines are 23:59 AoE.
 # PLACEHOLDER: these are the 2027 deadlines moved forward one year, to show the layout.
@@ -162,7 +162,7 @@ important_dates:
 # People. The first four groups appear on the homepage.
 people:
   General Chairs: [Wook-Shin Han (POSTECH), Kyuseok Shim (Seoul National University)]
-  Program Committee Chairs: [Yannis Velegrakis (Utrecht University), Rachel Pottinger (University of British Columbia)]
+  SIGMOD Program Chairs: [Yannis Velegrakis (Utrecht University), Rachel Pottinger (University of British Columbia)]
   # PLACEHOLDER: the 2027 PODS chairs. Replace with the 2028 PODS chairs and remove "(placeholder, 2027)".
   PODS General Chair (placeholder, 2027): [Yufei Tao (Chinese University of Hong Kong)]
   PODS Program Chair (placeholder, 2027): [Dan Olteanu (University of Zurich)]
