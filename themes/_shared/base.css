@@ -127,3 +127,45 @@ details.round .dlist li:last-child { border-bottom: 0; }
   .lb-acm img { height: 38px; }
   .lb-sig img { height: 46px; }
 }
+
+/* Deadline cards (Landing, Atlas) */
+.dcards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.dcards li { margin: 0; }
+.dcards a { display: flex; flex-direction: column; gap: 2px; height: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; text-decoration: none; color: var(--body); }
+.dcards a:hover { border-color: #c7d2e8; box-shadow: 0 4px 14px rgba(17,24,39,.06); }
+.dcards time { font-size: 13px; color: var(--muted); }
+.dcards time b { display: block; font: 500 24px/1.15 var(--serif); color: var(--ink); }
+.dcards .dc-track { margin-top: 6px; font-weight: 600; font-size: 14px; color: var(--navy); }
+.dcards .dc-label { font-size: 14px; line-height: 1.35; }
+.dcards li.next a { border-color: var(--warm); box-shadow: inset 0 3px 0 var(--warm); background: var(--cream); }
+.dcards.fact { display: block; }
+.dcards.fact a { border: 0; padding: 0; background: none; box-shadow: none !important; }
+
+/* Section index cards (Atlas) */
+.hubcards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.hubcards li { margin: 0; }
+.hubcards a { display: block; height: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--body); font-size: 14.5px; line-height: 1.45; }
+.hubcards a:hover { border-color: #c7d2e8; background: var(--bg2); }
+.hubcards b { color: var(--navy); font-size: 15.5px; }
+.hubcards span:not(.new) { display: block; margin-top: 4px; }
+.hubcards .soonline { color: var(--muted); font-style: italic; }
+
+/* On this page */
+.toc { font-size: 14px; }
+.toc h2 { font: 600 12px var(--sans); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 6px; }
+.toc ul { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+.toc a { display: block; padding: 3px 12px; color: var(--body); text-decoration: none; line-height: 1.35; }
+.toc a:hover { color: var(--navy); }
+
+/* Previous / next */
+.prevnext { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 36px; }
+.prevnext a { display: block; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px; }
+.prevnext a:hover { border-color: #c7d2e8; background: var(--bg2); }
+.prevnext small { display: block; font-weight: 400; color: var(--muted); font-size: 12.5px; }
+.prevnext .nx { text-align: right; grid-column: 2; }
+
+@media (max-width: 900px) { .dcards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .hubcards { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .dcards { grid-template-columns: minmax(0, 1fr); } .dcards time b { font-size: 21px; } }
+.dcards li.next { background: none; box-shadow: none; font-weight: inherit; }
+.dcards.fact time b::after { content: ","; }

@@ -1,0 +1,100 @@
+{%- import "_shared/macros.njk" as m -%}
+{%- set home = page.url == "/" -%}
+{%- set g = page.url | groupOf -%}
+{%- set body = content | headingIds -%}
+{%- set toc = body | toc -%}
+<!doctype html>
+<html lang="en">
+<head>
+{% include "_shared/head.njk" %}
+</head>
+<body class="theme-atlas{% if home %} is-home{% endif %}">
+<a class="skip" href="#main">Skip to content</a>
+{% if site.announcement %}<div class="announce"><div class="wrap">{{ site.announcement | inline | safe }}</div></div>{% endif %}
+
+<header class="masthead">
+  <div class="wrap top">
+    <a class="brand" href="/">
+      <span class="logo">{% logo "h" %}</span>
+      <span class="txt"><span class="name">{{ conf.short_name | yearEm | safe }}</span><span class="full">{{ conf.full_name }}</span></span>
+    </a>
+    <div class="when"><b>{{ conf.dates }}</b><span>{{ conf.location }}</span></div>
+    <a class="btn reg" href="{{ conf.register_link }}">Register</a>
+    <button class="menubtn" data-menu aria-expanded="false" aria-controls="drawer">Menu</button>
+  </div>
+  {#- Desktop: hovering or tabbing into the bar opens the whole site map. Group names lead to section index pages. -#}
+  <nav class="navbar" aria-label="Site">
+    <div class="wrap">
+      <ul class="bar">
+        <li><a href="/"{% if home %} aria-current="page"{% endif %}>Home</a></li>
+        {%- for grp in nav.all %}{% if not loop.first %}
+        <li class="{% if grp == g %}cur{% endif %}"><a href="{{ grp.hub }}">{{ grp.short }}</a></li>
+        {%- endif %}{% endfor %}
+      </ul>
+    </div>
+    <div class="mega">
+      <div class="wrap mega-in">
+        {%- for grp in nav.all %}
+        <section class="{% if grp == g %}cur{% endif %}"><h2><a href="{{ grp.hub }}">{{ grp.name }}</a></h2>{{ m.items(grp.items, page.url) }}</section>
+        {%- endfor %}
+      </div>
+    </div>
+  </nav>
+</header>
+<nav class="drawer" id="drawer" aria-label="Site (phone)"><div class="wrap">{{ m.drawer(nav.all, page.url, conf) }}</div></nav>
+
+{% if home %}
+<section class="hero">
+  <img src="/{{ conf.banner }}" alt="">
+  <div class="wrap">
+    <div class="tag">
+      <p class="t-when">{{ conf.dates }}</p>
+      <p class="t-where">{{ conf.location }} · {{ conf.venue }}</p>
+    </div>
+  </div>
+</section>
+<section class="wrap next">
+  <div class="next-h"><h2>Next deadlines</h2>{% if site.dates_note_short %}<span class="upnote">{{ site.dates_note_short }}</span>{% endif %}<a href="/calls/dates/">All important dates →</a></div>
+  <div>{% deadlines 4 %}</div>
+</section>
+{% else %}
+<div class="strip"><img src="/{{ conf.banner }}" alt=""></div>
+<div class="pagehead"><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a>{% if g and page.url != g.hub %} <span>›</span> <a href="{{ g.hub }}">{{ g.name }}</a>{% endif %} <span>›</span> {{ title }}</nav>
+  <h1 class="title">{{ title }}</h1>
+</div></div>
+{% endif %}
+
+<div class="wrap page">
+  <main id="main" tabindex="-1">
+    {%- if home %}<h1 class="title">{{ title }}</h1>{% endif %}
+    {%- if isHub %}<p class="lead">All pages in {{ title }}.</p>{% endif %}
+    <div class="prose">{{ body | safe }}</div>
+    {%- if not isSoon %}<p class="edit">Edit this page: <code>{% editPath page.inputPath %}</code></p>{% endif %}
+  </main>
+  <aside class="side">
+    {%- if toc.length > 1 %}
+    <nav class="toc" aria-label="On this page"><h2>On this page</h2><ul>{% for h in toc %}<li><a href="#{{ h.id }}">{{ h.text }}</a></li>{% endfor %}</ul></nav>
+    {%- endif %}
+    {%- if g and not home and not isHub %}
+    <nav class="insec" aria-label="In {{ g.name }}"><h2><a href="{{ g.hub }}">{{ g.name }}</a></h2>{{ m.items(g.items, page.url) }}</nav>
+    {%- endif %}
+    {%- if home %}
+    <nav class="explore" aria-label="Sections"><h2>Sections</h2><ul>{% for grp in nav.all %}{% if not loop.first %}<li><a href="{{ grp.hub }}">{{ grp.name }}</a></li>{% endif %}{% endfor %}</ul></nav>
+    {%- else %}
+    {% upcoming 4 %}
+    {%- endif %}
+  </aside>
+</div>
+
+{% include "_shared/logobar.njk" %}
+<footer class="foot">
+  <div class="wrap map">
+    {%- for grp in nav.all %}
+    <section><h2><a href="{{ grp.hub }}">{{ grp.name }}</a></h2>{{ m.items(grp.items, page.url) }}</section>
+    {%- endfor %}
+  </div>
+  <div class="wrap colophon"><span><b>{{ conf.short_name }}</b> · {{ conf.dates }} · {{ conf.location }}</span><span>{{ m.foot_links(site) }}</span></div>
+</footer>
+</body>
+</html>

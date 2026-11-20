@@ -53,7 +53,7 @@
 
 <main class="wrap">
   <h2>The proposals</h2>
-  <p class="sub">Open one and resize the window, or open it on a phone. Each card shows the desktop and phone homepage.</p>
+  <p class="sub">Open one and resize the window, or open it on a phone. Each card shows the desktop and phone homepage. Proposal 1 is the current favourite; the others show different ways to reach the same pages.</p>
   <div class="grid" id="grid"></div>
 
   <h2>What they share</h2>
@@ -76,10 +76,10 @@
   // The five proposals; the same list as themes/proposals.json.
   var P = [
     ["heritage", "Heritage", "The 2026 site, cleaned up: banner, left menu, page, right menu. Laptops stack both menus on the left; phones get a Menu button."],
-    ["masthead", "Masthead", "Closest to sigmod.org: one menu bar whose entries open the 2026 groups as dropdowns, a hero card on the homepage, and a side column with the current section."],
-    ["handbook", "Handbook", "Like conference documentation: one sidebar holds all eight groups as folding lists and stays put while you scroll. Best when the site has many pages."],
-    ["landing", "Landing", "The homepage leads with when, where and what's next, plus one card per group. Inner pages show their group's pages as buttons. Phones scroll the section tabs sideways."],
-    ["proceedings", "Proceedings", "The lightest: one centered column, a printed-programme header, a single line of section links, and the full site map in the footer. No banner image."]
+    ["masthead", "Masthead", "Closest to sigmod.org: one menu bar with dropdowns, a 2024-style information bar under the banner, and the current section's pages on the left of every page."],
+    ["handbook", "Handbook", "Like conference documentation: one sidebar with all eight groups as folding lists and a filter box, plus an 'On this page' list and previous/next links."],
+    ["landing", "Landing", "The homepage leads with when, where and the next deadlines, then every page grouped in cards. Inner pages show their group's pages as buttons."],
+    ["atlas", "Atlas", "One menu bar that opens the whole 2026 site map at once, an index page for each of the eight sections, and an 'On this page' list on long pages."]
   ];
   document.getElementById("grid").innerHTML = P.map(function (p, i) {
     return '<article class="card">' +

@@ -1,6 +1,9 @@
 {%- import "_shared/macros.njk" as m -%}
 {%- set home = page.url == "/" -%}
 {%- set g = page.url | groupOf -%}
+{%- set body = content | headingIds -%}
+{%- set toc = body | toc -%}
+{%- set nb = page.url | neighbors -%}
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,8 +23,10 @@
 
 <div class="shell">
   <nav class="sidebar drawer" id="sidebar" aria-label="Site">
+    <input class="filter" type="search" placeholder="Find a page…" aria-label="Find a page in the menu" data-filter=".sgrp" hidden>
     {%- for grp in nav.all %}
-    <details class="sgrp"{% if grp == g or (home and loop.first) %} open{% endif %}>
+    {%- set isOpen = grp == g or (home and loop.first) %}
+    <details class="sgrp"{% if isOpen %} open data-open{% endif %}>
       <summary>{{ grp.name }}</summary>
       {{ m.items(grp.items, page.url) }}
     </details>
@@ -31,28 +36,39 @@
 
   <main id="main" tabindex="-1">
     {%- if home %}
+    <div class="intro-img"><img src="/{{ conf.banner }}" alt=""></div>
     <section class="intro">
-      <img src="/{{ conf.banner }}" alt="">
-      <div class="intro-txt">
-        <p class="kicker">{{ conf.full_name }}</p>
-        <p class="big">{{ conf.dates }}<br><span>{{ conf.location }}</span></p>
-        <p class="cta"><a class="btn" href="{{ conf.register_link }}">Register</a> <a class="btn ghost" href="/calls/dates/">Important dates</a></p>
-      </div>
+      <p class="kicker">{{ conf.full_name }}</p>
+      <p class="big">{{ conf.short_name | yearEm | safe }}</p>
+      <dl class="facts">
+        <div><dt>When</dt><dd>{{ conf.dates }}</dd></div>
+        <div><dt>Where</dt><dd>{{ conf.location }}<small>{{ conf.venue }}</small></dd></div>
+        <div><dt>Next deadline</dt><dd>{% deadlines 1, "fact" %}</dd></div>
+      </dl>
+      <p class="cta"><a class="btn" href="{{ conf.register_link }}">Register</a> <a class="btn ghost" href="/calls/dates/">Important dates</a></p>
     </section>
-    <div class="home-up">{% upcoming 4 %}</div>
     {%- else %}
     {{ m.crumbs(page.url, title) }}
     {%- endif %}
-    <article class="doc">{{ m.body(title, content, page, isSoon) }}</article>
-    {%- if g and not home %}
-    {%- set fl = g.items -%}
-    <nav class="pager" aria-label="More in {{ g.name }}"><span>More in {{ g.name }}:</span>
-      {%- for i in fl %}{% if not i.children and i.href != page.url and not i.external %} <a href="{{ i.href }}">{{ i.title }}</a>{% endif %}{% endfor %}
+    <article class="doc">
+      <h1 class="title">{{ title }}</h1>
+      <div class="prose">{{ body | safe }}</div>
+      {%- if not isSoon %}<p class="edit">Edit this page: <code>{% editPath page.inputPath %}</code></p>{% endif %}
+    </article>
+    {%- if not home and (nb.prev or nb.next) %}
+    <nav class="prevnext" aria-label="Previous and next in {{ nb.group.name }}">
+      {%- if nb.prev %}<a class="pv" href="{{ nb.prev.href }}"><small>← Previous</small>{{ nb.prev.title }}</a>{% endif %}
+      {%- if nb.next %}<a class="nx" href="{{ nb.next.href }}"><small>Next →</small>{{ nb.next.title }}</a>{% endif %}
     </nav>
     {%- endif %}
   </main>
 
-  <aside class="rail" aria-label="Upcoming dates">{% if not home %}{% upcoming 5 %}{% endif %}</aside>
+  <aside class="rail" aria-label="On this page and upcoming dates">
+    {%- if toc.length > 1 %}
+    <nav class="toc" aria-label="On this page"><h2>On this page</h2><ul>{% for h in toc %}<li><a href="#{{ h.id }}">{{ h.text }}</a></li>{% endfor %}</ul></nav>
+    {%- endif %}
+    {% upcoming 4 %}
+  </aside>
 </div>
 
 {% include "_shared/logobar.njk" %}

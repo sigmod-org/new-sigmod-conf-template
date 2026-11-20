@@ -1,6 +1,8 @@
 {%- import "_shared/macros.njk" as m -%}
 {%- set home = page.url == "/" -%}
 {%- set g = page.url | groupOf -%}
+{%- set body = content | headingIds -%}
+{%- set toc = body | toc -%}
 <!doctype html>
 <html lang="en">
 <head>
@@ -33,19 +35,31 @@
     <div class="hero-txt">
       <h1 class="hero-title">{{ conf.short_name | yearEm | safe }}</h1>
       <p class="hero-full">{{ conf.full_name }}</p>
-      <p class="hero-when"><b>{{ conf.dates }}</b> · {{ conf.location }}</p>
-      <p class="cta"><a class="btn" href="{{ conf.register_link }}">Register</a> <a class="btn ghost" href="/calls/dates/">Important dates</a></p>
     </div>
   </div>
 </section>
+<section class="wrap facts" aria-label="Key facts">
+  <div><span>When</span><b>{{ conf.dates }}</b></div>
+  <div><span>Where</span><b>{{ conf.location }}</b><small>{{ conf.venue }}</small></div>
+  <div class="f-next"><span>Next deadline</span>{% deadlines 1, "fact" %}</div>
+  <div class="f-cta"><a class="btn" href="{{ conf.register_link }}">Register</a><a class="btn ghost" href="/calls/dates/">Important dates</a></div>
+</section>
 
-<section class="wrap quick" aria-label="Sections of this site">
-  {%- for grp in nav.all %}{% if not loop.first %}
-  <div class="qcard">
-    <h2><a href="{{ grp.first.href }}">{{ grp.name }}</a></h2>
-    <ul>{% for i in grp.items %}{% if loop.index <= 4 %}<li><a href="{{ i.href if not i.children else i.children[0].href }}">{{ i.title }}</a>{% if i.isNew %} <span class="new">new</span>{% endif %}</li>{% endif %}{% endfor %}</ul>
+<section class="wrap band">
+  <div class="band-h"><h2>Next deadlines</h2>{% if site.dates_note_short %}<span class="upnote">{{ site.dates_note_short }}</span>{% endif %}<a href="/calls/dates/">All dates →</a></div>
+  <div>{% deadlines 4 %}</div>
+</section>
+
+<section class="wrap band" aria-label="Every page on this site">
+  <div class="band-h"><h2>Find your way</h2></div>
+  <div class="quick">
+    {%- for grp in nav.all %}{% if not loop.first %}
+    <details class="qcard" open>
+      <summary>{{ grp.name }}</summary>
+      {{ m.items(grp.items, page.url) }}
+    </details>
+    {%- endif %}{% endfor %}
   </div>
-  {%- endif %}{% endfor %}
 </section>
 {% else %}
 <section class="sechead">
@@ -66,16 +80,16 @@
 
 <div class="wrap page">
   <main id="main" tabindex="-1">
-    {%- if home %}
-    <h2 class="title home-h">{{ title }}</h2>
-    <div class="prose">{{ content | safe }}</div>
-    <p class="edit">Edit this page: <code>{% editPath page.inputPath %}</code></p>
-    {%- else %}
-    <div class="prose">{{ content | safe }}</div>
+    {%- if home %}<h2 class="title home-h">{{ title }}</h2>{% endif %}
+    <div class="prose">{{ body | safe }}</div>
     {%- if not isSoon %}<p class="edit">Edit this page: <code>{% editPath page.inputPath %}</code></p>{% endif %}
-    {%- endif %}
   </main>
-  <aside class="side">{% upcoming 5 %}</aside>
+  <aside class="side">
+    {%- if toc.length > 1 %}
+    <nav class="toc" aria-label="On this page"><h2>On this page</h2><ul>{% for h in toc %}<li><a href="#{{ h.id }}">{{ h.text }}</a></li>{% endfor %}</ul></nav>
+    {%- endif %}
+    {%- if not home %}{% upcoming 4 %}{% endif %}
+  </aside>
 </div>
 
 {% include "_shared/logobar.njk" %}

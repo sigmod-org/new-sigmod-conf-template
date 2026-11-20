@@ -7,10 +7,10 @@ This repository holds **five design proposals** built from the same content (SIG
 | # | Proposal | Idea |
 |---|---|---|
 | 1 | `heritage` | The 2026 site, cleaned up: banner, left menu, page, right menu. |
-| 2 | `masthead` | Closest to sigmod.org: one menu bar with dropdowns, a hero card, a side column. |
-| 3 | `handbook` | One sidebar with all eight menu groups as folding lists, like documentation. |
-| 4 | `landing` | A homepage that leads with dates and one card per group; section buttons on inner pages. |
-| 5 | `proceedings` | The lightest: one centered column, a single line of section links, the site map in the footer. |
+| 2 | `masthead` | Closest to sigmod.org: menu bar with dropdowns, a 2024-style information bar, the current section on the left. |
+| 3 | `handbook` | One sidebar with all eight menu groups as folding lists and a filter box; "On this page" and previous/next links. |
+| 4 | `landing` | A homepage that leads with key facts and the next deadlines, then every page grouped in cards. |
+| 5 | `atlas` | One menu bar that opens the whole site map at once, plus an index page for each section. |
 
 ## How a year's site is edited
 
@@ -38,7 +38,7 @@ Editors can make these changes on github.com. Every push to `main` rebuilds and 
 - `eleventy.config.js` reads `site.yml`, builds the menus and renders the dates, people and news blocks. Editors never need to open it.
 - `.github/workflows/pages.yml` builds all five designs and publishes them with GitHub Pages: on every push to `main`, and once a day so dates stay current.
 
-A conference that picks one design keeps `content/`, `assets/`, `themes/_shared/` and that one theme folder.
+Some designs switch on extras in `themes/proposals.json` (Atlas sets `"hubs": true` to build an index page per menu group). A conference that picks one design keeps `content/`, `assets/`, `themes/_shared/` and that one theme folder.
 
 ## Run it locally
 
