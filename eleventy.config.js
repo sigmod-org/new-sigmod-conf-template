@@ -111,6 +111,19 @@ function personCard(p) {
   return `<li>${pic}<span><b>${esc(name)}</b>${aff ? `<small>${esc(aff)}</small>` : ""}</span></li>`;
 }
 const peopleCards = (entries) => `<div class="org">${entries.map(([r, ps]) => `<section class="org-role"><h3>${esc(r)}</h3><ul class="pcards">${[].concat(ps).map(personCard).join("")}</ul></section>`).join("")}</div>`;
+// site.people is grouped by organizers page (Conference, SIGMOD, PODS); a flat list also works.
+const peopleSections = (() => {
+  const ppl = site.people || {};
+  const flatList = Object.values(ppl).every((v) => Array.isArray(v) || typeof v === "string");
+  return flatList ? { Conference: ppl } : ppl;
+})();
+const allRoles = Object.values(peopleSections).flatMap((sec) => Object.entries(sec || {}));
+// Homepage chairs: roles listed in homepage_chairs (matched by the start of the role name).
+const homepageRoles = () => {
+  const want = site.homepage_chairs;
+  if (!want) return allRoles.slice(0, 4);
+  return want.flatMap((w) => allRoles.filter(([r]) => r.toLowerCase().startsWith(String(w).toLowerCase())));
+};
 const peopleList = (entries) => `<dl class="people">${entries.map(([r, ps]) => `<div><dt>${esc(r)}</dt>${[].concat(ps).map((p) => `<dd>${person(p)}</dd>`).join("")}</div>`).join("")}</dl>`;
 const shortcodes = {
   dates: (arg) => {
@@ -121,8 +134,13 @@ const shortcodes = {
     return `<div class="dates-block">${note}${tracks.map((t) => `<section class="track"><h2 id="${t.track.toLowerCase().replace(/[^a-z0-9]+/g, "-")}">${esc(t.track)}</h2>${datesFor(t)}${t.page ? `<p class="callink"><a href="${hrefOf(t.page)}">Read the call →</a></p>` : ""}</section>`).join("")}</div>`;
   },
   news: () => `<ul class="news">${(site.news || []).map((n) => `<li>${inline(n)}</li>`).join("")}</ul>`,
-  chairs: () => peopleList(Object.entries(site.people || {}).slice(0, 4)),
-  people: () => peopleCards(Object.entries(site.people || {})),
+  chairs: () => peopleList(homepageRoles()),
+  // {{people}} = everyone; {{people: SIGMOD}} = one group from site.yml
+  people: (arg) => {
+    if (!arg) return peopleCards(allRoles);
+    const key = Object.keys(peopleSections).find((k) => k.toLowerCase() === arg.toLowerCase());
+    return key ? peopleCards(Object.entries(peopleSections[key] || {})) : `<p class="warn">No people group "${esc(arg)}" in site.yml.</p>`;
+  },
   sponsors: () => {
     const tiers = Object.entries(site.sponsors || {}).filter(([, s]) => s && Object.keys(s).length);
     if (!tiers.length) return `<p class="soon">Sponsors will be announced here. Interested in supporting SIGMOD/PODS ${esc(conf.year)}? See <a href="/org/sponsor-opportunities/">Sponsor Opportunities</a>.</p>`;

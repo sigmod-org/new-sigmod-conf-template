@@ -159,14 +159,21 @@ important_dates:
       Notification: 2028-03-08
       Camera-ready: 2028-04-01
 
-# People. The first four groups appear on the homepage.
+# People, grouped by organizers page: Conference → org/conference, SIGMOD → org/sigmod, PODS → org/pods.
+# Write each person as "Name (Affiliation)". Photos: assets/people/<first-last>.jpg.
 people:
-  General Chairs: [Wook-Shin Han (POSTECH), Kyuseok Shim (Seoul National University)]
-  SIGMOD Program Chairs: [Yannis Velegrakis (Utrecht University), Rachel Pottinger (University of British Columbia)]
-  # PLACEHOLDER: the 2027 PODS chairs. Replace with the 2028 PODS chairs and remove "(placeholder, 2027)".
-  PODS General Chair (placeholder, 2027): [Yufei Tao (Chinese University of Hong Kong)]
-  PODS Program Chair (placeholder, 2027): [Dan Olteanu (University of Zurich)]
-  Web Chair: [Kyoungmin Kim (KAIST)]
+  Conference:
+    General Chairs: [Wook-Shin Han (POSTECH), Kyuseok Shim (Seoul National University)]
+    Web Chair: [Kyoungmin Kim (KAIST)]
+  SIGMOD:
+    SIGMOD Program Chairs: [Yannis Velegrakis (Utrecht University), Rachel Pottinger (University of British Columbia)]
+  PODS:
+    # PLACEHOLDER: the 2027 PODS chairs. Replace with the 2028 PODS chairs and remove "(placeholder, 2027)".
+    PODS General Chair (placeholder, 2027): [Yufei Tao (Chinese University of Hong Kong)]
+    PODS Program Chair (placeholder, 2027): [Dan Olteanu (University of Zurich)]
+
+# Roles shown in the homepage "Conference chairs" block (matched by the start of the role name).
+homepage_chairs: [General Chairs, SIGMOD Program Chairs, PODS General Chair, PODS Program Chair]
 
 # Sponsors by tier: "Name: https://link". Empty tiers are not shown.
 sponsors:
