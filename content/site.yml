@@ -163,6 +163,9 @@ important_dates:
 people:
   General Chairs: [Wook-Shin Han (POSTECH), Kyuseok Shim (Seoul National University)]
   Program Committee Chairs: [Yannis Velegrakis (Utrecht University), Rachel Pottinger (University of British Columbia)]
+  # PLACEHOLDER: the 2027 PODS chairs. Replace with the 2028 PODS chairs and remove "(placeholder, 2027)".
+  PODS General Chair (placeholder, 2027): [Yufei Tao (Chinese University of Hong Kong)]
+  PODS Program Chair (placeholder, 2027): [Dan Olteanu (University of Zurich)]
   Web Chair: [Kyoungmin Kim (KAIST)]
 
 # Sponsors by tier: "Name: https://link". Empty tiers are not shown.
