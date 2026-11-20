@@ -176,3 +176,23 @@ a.is-soon:hover { color: var(--muted) !important; }
 .foot a.is-soon, .utility a.is-soon { color: #8797b5 !important; }
 .pills a.is-soon { background: var(--bg2); }
 .hubcards a:has(.soonline) b { color: #9aa1ab; font-style: italic; }
+
+/* "AoE" next to every deadline (title gives 23:59 Anywhere on Earth, UTC−12) */
+abbr.aoe { font-size: .76em; font-weight: 500; letter-spacing: .03em; color: var(--muted); text-decoration: none; cursor: help; margin-left: 1px; }
+.past abbr.aoe { color: inherit; }
+.dcards.fact time { white-space: normal; }
+table.dates td { white-space: normal; }
+table.dates td .dd { white-space: normal; }
+table.dates th, table.dates td { padding-left: 10px; padding-right: 10px; }
+table.dates tbody th { min-width: 128px; }
+
+/* Organizers with photos ({{people}}); the homepage {{chairs}} block stays text-only */
+.org-role { margin: 0 0 26px; }
+.prose .org-role h3 { margin: 0 0 10px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.pcards { list-style: none; margin: 0 !important; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.pcards li { margin: 0; display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+.pcards img, .pinit { width: 72px; height: 72px; border-radius: 50%; flex: none; object-fit: cover; background: var(--bg2); }
+.pinit { display: grid; place-items: center; font: 600 22px var(--sans); color: var(--navy); background: var(--bg3); }
+.pcards b { display: block; color: var(--ink); font-size: 15.5px; line-height: 1.3; }
+.pcards small { display: block; color: var(--muted); font-size: 14px; line-height: 1.35; margin-top: 2px; }
+@media (max-width: 480px) { .pcards img, .pinit { width: 60px; height: 60px; } }

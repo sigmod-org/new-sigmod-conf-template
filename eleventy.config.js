@@ -63,9 +63,11 @@ const day = (s) => new Date(s + "T00:00:00");
 const fmt = (v, withYear = true) => {
   const { a, b } = span(v), x = day(a), y = day(b);
   const yr = withYear ? `, ${y.getFullYear()}` : "";
-  if (a === b) return `${MON[x.getMonth()]} ${x.getDate()}${yr}`;
-  return `${MON[x.getMonth()]} ${x.getDate()}–${x.getMonth() === y.getMonth() ? "" : MON[y.getMonth()] + " "}${y.getDate()}${yr}`;
+  // Non-breaking space keeps "Jan 10" together; a long date may still wrap before the year.
+  if (a === b) return `${MON[x.getMonth()]}\u00a0${x.getDate()}${yr}`;
+  return `${MON[x.getMonth()]}\u00a0${x.getDate()}–${x.getMonth() === y.getMonth() ? "" : MON[y.getMonth()] + "\u00a0"}${y.getDate()}${yr}`;
 };
+const AOE_TAG = `<abbr class="aoe" title="23:59 Anywhere on Earth (UTC−12)">AoE</abbr>`;
 const isPast = (v) => new Date(span(v).b + "T23:59:00" + AOE) < TODAY;
 const all = [];
 for (const t of site.important_dates || [])
@@ -81,14 +83,14 @@ const shortTrack = (t) => t.replace(" research papers", "").replace(" track", ""
 function datesFor(t) {
   const rows = Object.entries(t.dates);
   if (!t.rounds)
-    return `<ul class="dlist">${rows.map(([l, v]) => `<li class="${dcls(v)}" ${dattr(v)}><span>${esc(l)}</span><time datetime="${span(v).a}">${fmt(v)}</time></li>`).join("")}</ul>`;
+    return `<ul class="dlist">${rows.map(([l, v]) => `<li class="${dcls(v)}" ${dattr(v)}><span>${esc(l)}</span><time datetime="${span(v).a}">${fmt(v)} ${AOE_TAG}</time></li>`).join("")}</ul>`;
   const table = `<div class="tscroll wide-only"><table class="dates"><thead><tr><th></th>${t.rounds.map((r) => `<th scope="col">${esc(r)}</th>`).join("")}</tr></thead><tbody>${rows
-    .map(([l, vals]) => `<tr><th scope="row">${esc(l)}</th>${vals.map((v) => `<td class="${dcls(v)}" ${dattr(v)}>${fmt(v)}</td>`).join("")}</tr>`)
+    .map(([l, vals]) => `<tr><th scope="row">${esc(l)}</th>${vals.map((v) => `<td class="${dcls(v)}" ${dattr(v)}><span class="dd">${fmt(v)}</span> ${AOE_TAG}</td>`).join("")}</tr>`)
     .join("")}</tbody></table></div>`;
   const firstOpen = t.rounds.findIndex((_, i) => rows.some(([, vals]) => !isPast(vals[i])));
   const lists = `<div class="narrow-only rounds">${t.rounds
     .map((r, i) => `<details class="round"${i === firstOpen ? " open" : ""}><summary>${esc(r)}<small class="closed">closed</small></summary><ul class="dlist">${rows
-      .map(([l, vals]) => `<li class="${dcls(vals[i])}" ${dattr(vals[i])}><span>${esc(l)}</span><time datetime="${span(vals[i]).a}">${fmt(vals[i])}</time></li>`)
+      .map(([l, vals]) => `<li class="${dcls(vals[i])}" ${dattr(vals[i])}><span>${esc(l)}</span><time datetime="${span(vals[i]).a}">${fmt(vals[i])} ${AOE_TAG}</time></li>`)
       .join("")}</ul></details>`)
     .join("")}</div>`;
   return table + lists;
@@ -96,6 +98,19 @@ function datesFor(t) {
 
 /* ---------- shortcodes that editors can put in Markdown, each on its own line ---------- */
 const person = (p) => { const m = String(p).match(/^(.*?)\s*\((.*)\)\s*$/); return m ? `${esc(m[1])} <small>${esc(m[2])}</small>` : esc(p); };
+// Organizer photos: assets/people/<first-last>.jpg (square). Missing photo → initials.
+const personSlug = (n) => n.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+function personCard(p) {
+  const m = String(p).match(/^(.*?)\s*\((.*)\)\s*$/);
+  const name = m ? m[1] : String(p), aff = m ? m[2] : "";
+  const file = `assets/people/${personSlug(name)}.jpg`;
+  const initials = name.split(/[\s-]+/).filter(Boolean).map((w) => w[0]).filter((c) => /[A-Za-z]/.test(c)).slice(0, 2).join("").toUpperCase();
+  const pic = fs.existsSync(file)
+    ? `<img src="/${file}" alt="" width="80" height="80" loading="lazy">`
+    : `<span class="pinit" aria-hidden="true">${esc(initials)}</span>`;
+  return `<li>${pic}<span><b>${esc(name)}</b>${aff ? `<small>${esc(aff)}</small>` : ""}</span></li>`;
+}
+const peopleCards = (entries) => `<div class="org">${entries.map(([r, ps]) => `<section class="org-role"><h3>${esc(r)}</h3><ul class="pcards">${[].concat(ps).map(personCard).join("")}</ul></section>`).join("")}</div>`;
 const peopleList = (entries) => `<dl class="people">${entries.map(([r, ps]) => `<div><dt>${esc(r)}</dt>${[].concat(ps).map((p) => `<dd>${person(p)}</dd>`).join("")}</div>`).join("")}</dl>`;
 const shortcodes = {
   dates: (arg) => {
@@ -107,7 +122,7 @@ const shortcodes = {
   },
   news: () => `<ul class="news">${(site.news || []).map((n) => `<li>${inline(n)}</li>`).join("")}</ul>`,
   chairs: () => peopleList(Object.entries(site.people || {}).slice(0, 4)),
-  people: () => peopleList(Object.entries(site.people || {})),
+  people: () => peopleCards(Object.entries(site.people || {})),
   sponsors: () => {
     const tiers = Object.entries(site.sponsors || {}).filter(([, s]) => s && Object.keys(s).length);
     if (!tiers.length) return `<p class="soon">Sponsors will be announced here. Interested in supporting SIGMOD/PODS ${esc(conf.year)}? See <a href="/org/sponsor-opportunities/">Sponsor Opportunities</a>.</p>`;
@@ -124,7 +139,7 @@ function upcomingBox(n = 4, title = "Upcoming dates") {
   const items = all.map((m) => {
     const hide = isPast(m.v) || shown >= n;
     if (!hide) shown++;
-    return `<li class="${dcls(m.v)}" ${dattr(m.v)}${hide ? " hidden" : ""}><span><a href="${hrefOf(m.page)}">${esc(shortTrack(m.track))}</a>${m.round ? " · " + esc(m.round) : ""}<br>${esc(m.label)}</span><time datetime="${span(m.v).a}">${fmt(m.v, false)}</time></li>`;
+    return `<li class="${dcls(m.v)}" ${dattr(m.v)}${hide ? " hidden" : ""}><span><a href="${hrefOf(m.page)}">${esc(shortTrack(m.track))}</a>${m.round ? " · " + esc(m.round) : ""}<br>${esc(m.label)}</span><time datetime="${span(m.v).a}">${fmt(m.v, false)} ${AOE_TAG}</time></li>`;
   });
   const note = site.dates_note ? `<p class="small upnote">${esc(site.dates_note_short || "Placeholder dates")}</p>` : "";
   return `<div class="upbox"><h2>${esc(title)}</h2>${note}<ul class="dlist compact" data-upcoming="${n}">${items.join("")}</ul><p class="none"${shown ? " hidden" : ""}>All submission deadlines have passed.</p><p class="small"><a href="/calls/dates/">All important dates</a> · 23:59 AoE</p></div>`;
@@ -138,7 +153,7 @@ function deadlines(n = 4, style = "cards") {
     if (!hide) shown++;
     const { a } = span(m.v);
     const dt = day(a);
-    return `<li ${dattr(m.v)}${hide ? " hidden" : ""}><a href="${hrefOf(m.page)}"><time datetime="${a}"><b>${fmt(m.v, false)}</b> ${dt.getFullYear()}</time><span class="dc-track">${esc(shortTrack(m.track))}${m.round ? " · " + esc(m.round) : ""}</span><span class="dc-label">${esc(m.label)}</span></a></li>`;
+    return `<li ${dattr(m.v)}${hide ? " hidden" : ""}><a href="${hrefOf(m.page)}"><time datetime="${a}"><b>${fmt(m.v, false)}</b> ${dt.getFullYear()} · 23:59 ${AOE_TAG}</time><span class="dc-track">${esc(shortTrack(m.track))}${m.round ? " · " + esc(m.round) : ""}</span><span class="dc-label">${esc(m.label)}</span></a></li>`;
   });
   return `<ol class="dcards ${style}" data-upcoming="${n}">${items.join("")}</ol><p class="none"${shown ? " hidden" : ""}>All submission deadlines have passed.</p>`;
 }
