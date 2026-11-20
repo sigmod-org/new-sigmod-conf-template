@@ -10,7 +10,9 @@ import { HtmlBasePlugin } from "@11ty/eleventy";
 const THEME = process.env.THEME || "heritage";
 // Per-design options from themes/proposals.json (e.g. "hubs": true builds an index page for each menu group).
 const THEME_OPTS = (JSON.parse(fs.readFileSync("themes/proposals.json", "utf8")).find((p) => p.id === THEME) || {});
-const TODAY = process.env.TODAY ? new Date(process.env.TODAY + "T12:00:00") : new Date();
+// Deadlines close at 23:59 Anywhere on Earth (AoE, UTC−12). TODAY=YYYY-MM-DD previews a day (noon AoE).
+const AOE = "-12:00";
+const TODAY = process.env.TODAY ? new Date(process.env.TODAY + "T12:00:00" + AOE) : new Date();
 const md = markdownIt({ html: true });
 
 const site = yaml.load(fs.readFileSync("content/site.yml", "utf8"), { schema: yaml.CORE_SCHEMA });
@@ -64,7 +66,7 @@ const fmt = (v, withYear = true) => {
   if (a === b) return `${MON[x.getMonth()]} ${x.getDate()}${yr}`;
   return `${MON[x.getMonth()]} ${x.getDate()}–${x.getMonth() === y.getMonth() ? "" : MON[y.getMonth()] + " "}${y.getDate()}${yr}`;
 };
-const isPast = (v) => new Date(span(v).b + "T23:59:00") < TODAY;
+const isPast = (v) => new Date(span(v).b + "T23:59:00" + AOE) < TODAY;
 const all = [];
 for (const t of site.important_dates || [])
   for (const [label, val] of Object.entries(t.dates))

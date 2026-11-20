@@ -22,7 +22,7 @@ content/site.yml          conference name, dates, city, logo, accent color, menu
 content/pages/**/*.md     one Markdown file per page
 ```
 
-- **Change a date:** edit `important_dates` in `site.yml`. The homepage box, the Important dates page and every call page update. Past dates turn grey and the next one is highlighted.
+- **Change a date:** edit `important_dates` in `site.yml`. The homepage box, the Important dates page and every call page update. Past dates turn grey and the next one is highlighted; a deadline counts as past once 23:59 Anywhere on Earth (AoE) has gone by, wherever the visitor is.
 - **Edit a page:** open `content/pages/<group>/<page>.md`. Each page's footer shows the file to edit.
 - **Add a page:** add a line to `left_menu` or `right_menu` in `site.yml` (for example `Visa Letters: participants/visa`) and create `content/pages/participants/visa.md`. Until the file exists, the menu item appears in gray italics and its page says "coming soon".
 - **Hide a menu item:** put `#` in front of its line in `site.yml`.

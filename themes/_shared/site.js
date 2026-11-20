@@ -1,11 +1,13 @@
 /* The only script on the site (about 2 KB). Pages work without it.
-   - Re-marks past and next dates against today's date, so the static pages stay right between builds.
+   - Re-marks past and next dates against the current time, so the static pages stay right between builds.
+     A date counts as past once 23:59 Anywhere on Earth (AoE, UTC−12) on that day has gone by, wherever the visitor is.
    - Opens and closes the phone menu.
    - ?today=YYYY-MM-DD previews any date (kept on internal links). */
 (function () {
   var q = new URLSearchParams(location.search);
-  var today = q.get("today") ? new Date(q.get("today") + "T12:00:00") : new Date();
-  var end = function (el) { return new Date(el.getAttribute("data-e") + "T23:59:00"); };
+  var AOE = "-12:00";
+  var today = q.get("today") ? new Date(q.get("today") + "T12:00:00" + AOE) : new Date();
+  var end = function (el) { return new Date(el.getAttribute("data-e") + "T23:59:00" + AOE); };
   var start = function (el) { return el.getAttribute("data-d"); };
   var dated = Array.prototype.slice.call(document.querySelectorAll("[data-d]"));
   var next = null;
