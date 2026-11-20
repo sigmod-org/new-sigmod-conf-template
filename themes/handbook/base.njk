@@ -57,8 +57,8 @@
     </article>
     {%- if not home and (nb.prev or nb.next) %}
     <nav class="prevnext" aria-label="Previous and next in {{ nb.group.name }}">
-      {%- if nb.prev %}<a class="pv" href="{{ nb.prev.href }}"><small>← Previous</small>{{ nb.prev.title }}</a>{% endif %}
-      {%- if nb.next %}<a class="nx" href="{{ nb.next.href }}"><small>Next →</small>{{ nb.next.title }}</a>{% endif %}
+      {%- if nb.prev %}<a class="pv{% if not nb.prev.exists %} is-soon{% endif %}" href="{{ nb.prev.href }}"><small>← Previous</small>{{ nb.prev.title }}</a>{% endif %}
+      {%- if nb.next %}<a class="nx{% if not nb.next.exists %} is-soon{% endif %}" href="{{ nb.next.href }}"><small>Next →</small>{{ nb.next.title }}</a>{% endif %}
     </nav>
     {%- endif %}
   </main>

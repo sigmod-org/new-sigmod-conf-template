@@ -169,3 +169,10 @@ details.round .dlist li:last-child { border-bottom: 0; }
 @media (max-width: 480px) { .dcards { grid-template-columns: minmax(0, 1fr); } .dcards time b { font-size: 21px; } }
 .dcards li.next { background: none; box-shadow: none; font-weight: inherit; }
 .dcards.fact time b::after { content: ","; }
+
+/* Menu entries whose page is not published yet (no file in content/pages) */
+a.is-soon { font-style: italic; color: #9aa1ab !important; }
+a.is-soon:hover { color: var(--muted) !important; }
+.foot a.is-soon, .utility a.is-soon { color: #8797b5 !important; }
+.pills a.is-soon { background: var(--bg2); }
+.hubcards a:has(.soonline) b { color: #9aa1ab; font-style: italic; }

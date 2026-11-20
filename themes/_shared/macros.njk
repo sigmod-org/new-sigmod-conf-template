@@ -7,7 +7,7 @@
   {%- if i.children %}
   <li class="parent"><span>{{ i.title }}</span>{{ items(i.children, url) }}</li>
   {%- else %}
-  <li><a href="{{ i.href }}"{% if i.href == url %} aria-current="page"{% endif %}{% if i.external %} rel="noopener"{% endif %}>{{ i.title }}{% if i.external %} <span class="ext" aria-label="external site">↗</span>{% endif %}{% if i.isNew %} <span class="new">new</span>{% endif %}</a></li>
+  <li><a href="{{ i.href }}"{% if not i.exists %} class="is-soon" title="Published closer to the conference"{% endif %}{% if i.href == url %} aria-current="page"{% endif %}{% if i.external %} rel="noopener"{% endif %}>{{ i.title }}{% if i.external %} <span class="ext" aria-label="external site">↗</span>{% endif %}{% if i.isNew %} <span class="new">new</span>{% endif %}</a></li>
   {%- endif %}
 {%- endfor %}
 </ul>

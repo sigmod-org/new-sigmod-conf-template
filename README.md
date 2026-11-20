@@ -24,7 +24,7 @@ content/pages/**/*.md     one Markdown file per page
 
 - **Change a date:** edit `important_dates` in `site.yml`. The homepage box, the Important dates page and every call page update. Past dates turn grey and the next one is highlighted.
 - **Edit a page:** open `content/pages/<group>/<page>.md`. Each page's footer shows the file to edit.
-- **Add a page:** add a line to `left_menu` or `right_menu` in `site.yml` (for example `Visa Letters: participants/visa`) and create `content/pages/participants/visa.md`. Until the file exists, the menu item shows "coming soon".
+- **Add a page:** add a line to `left_menu` or `right_menu` in `site.yml` (for example `Visa Letters: participants/visa`) and create `content/pages/participants/visa.md`. Until the file exists, the menu item appears in gray italics and its page says "coming soon".
 - **Hide a menu item:** put `#` in front of its line in `site.yml`.
 - **Reuse data inside a page:** put one of these on its own line in a `.md` file: `{{dates}}`, `{{dates: PODS research papers}}`, `{{news}}`, `{{chairs}}`, `{{people}}`, `{{sponsors}}`.
 - **Mark a page "new" in the menu:** add it to `highlight` in `site.yml`.
