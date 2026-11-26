@@ -39,34 +39,6 @@
     r.querySelectorAll("details.round").forEach(function (d) { d.open = d === first; });
   });
 
-  // Sideways-scrolling tab strips (phones): bring the current tab into view.
-  document.querySelectorAll(".tabs, .pills").forEach(function (strip) {
-    var cur = strip.querySelector(".cur, [aria-current]");
-    if (cur && strip.scrollWidth > strip.clientWidth) strip.scrollLeft = cur.offsetLeft - strip.clientWidth / 2 + cur.offsetWidth / 2;
-  });
-
-  // Menu filter (Handbook): type to narrow the sidebar links.
-  var filter = document.querySelector("[data-filter]");
-  if (filter) {
-    var groups = document.querySelectorAll(filter.getAttribute("data-filter"));
-    filter.hidden = false;
-    filter.addEventListener("input", function () {
-      var t = filter.value.trim().toLowerCase();
-      groups.forEach(function (g) {
-        var any = false;
-        g.querySelectorAll("li").forEach(function (li) {
-          var hit = !t || li.textContent.toLowerCase().indexOf(t) >= 0 || g.querySelector("summary").textContent.toLowerCase().indexOf(t) >= 0;
-          li.hidden = !hit; if (hit && !li.querySelector("li")) any = true;
-        });
-        g.hidden = !any;
-        if (t) g.open = any; else g.open = g.hasAttribute("data-open");
-      });
-    });
-  }
-
-  // Section lists that are open on wide screens start folded on phones.
-  if (window.matchMedia("(max-width: 900px)").matches) document.querySelectorAll("details.sec-d, details.qcard").forEach(function (d) { d.open = false; });
-
   var btn = document.querySelector("[data-menu]");
   if (btn) btn.addEventListener("click", function () {
     var open = document.body.classList.toggle("menu-open");

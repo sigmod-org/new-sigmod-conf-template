@@ -1,15 +1,12 @@
 // Eleventy build for the SIGMOD/PODS conference site.
 // Editors never touch this file: they edit content/site.yml and content/pages/**/*.md.
-// THEME picks the design (a folder in themes/). The default is "heritage".
+// The page layout, stylesheet and script are in theme/.
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 import markdownIt from "markdown-it";
 import { HtmlBasePlugin } from "@11ty/eleventy";
 
-const THEME = process.env.THEME || "heritage";
-// Per-design options from themes/proposals.json (e.g. "hubs": true builds an index page for each menu group).
-const THEME_OPTS = (JSON.parse(fs.readFileSync("themes/proposals.json", "utf8")).find((p) => p.id === THEME) || {});
 // Deadlines close at 23:59 Anywhere on Earth (AoE, UTC−12). TODAY=YYYY-MM-DD previews a day (noon AoE).
 const AOE = "-12:00";
 const TODAY = process.env.TODAY ? new Date(process.env.TODAY + "T12:00:00" + AOE) : new Date();
@@ -34,27 +31,12 @@ const flat = (items) => items.flatMap((i) => (i.children ? flat(i.children) : [i
 const toGroups = (menu, side) =>
   Object.entries(menu || {}).map(([name, items]) => {
     const list = toItems(items);
-    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-    return { name, slug, side, short: (site.short_names || {})[name] || name, items: list, hrefs: flat(list).map((i) => i.href), first: flat(list).find((i) => !i.external), hub: `/${slug}/` };
+    return { name, side, short: (site.short_names || {})[name] || name, items: list, hrefs: flat(list).map((i) => i.href), first: flat(list).find((i) => !i.external) };
   });
 const left = toGroups(site.left_menu, "left");
 const right = toGroups(site.right_menu, "right");
 const nav = { left, right, all: [...left, ...right] };
 const soon = nav.all.flatMap((g) => flat(g.items)).filter((i) => !i.exists && i.slug !== "home");
-
-// First sentence or paragraph of a page, for section index cards.
-function describe(item) {
-  if (item.external) return "External site";
-  if (!item.exists) return "Coming soon";
-  const body = fs.readFileSync(`content/pages/${item.slug}.md`, "utf8").replace(/^---[\s\S]*?---/, "");
-  const para = body.split(/\n\s*\n/).map((x) => x.trim()).find((x) => x && !/^(#|\{\{|>|\||\[|!)/.test(x));
-  if (!para) return "";
-  const text = para.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*_`]/g, "").replace(/\s+/g, " ");
-  return text.length > 150 ? text.slice(0, 150).replace(/\s+\S*$/, "") + "…" : text;
-}
-const hubs = THEME_OPTS.hubs
-  ? nav.all.map((g) => ({ ...g, cards: g.items.flatMap((i) => (i.children ? i.children.map((c) => ({ ...c, title: `${i.title}: ${c.title}` })) : [i])).map((i) => ({ ...i, text: describe(i) })) }))
-  : [];
 
 /* ---------- dates ---------- */
 const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -163,19 +145,6 @@ function upcomingBox(n = 4, title = "Upcoming dates") {
   return `<div class="upbox"><h2>${esc(title)}</h2>${note}<ul class="dlist compact" data-upcoming="${n}">${items.join("")}</ul><p class="none"${shown ? " hidden" : ""}>All submission deadlines have passed.</p><p class="small"><a href="/calls/dates/">All important dates</a> · 23:59 AoE</p></div>`;
 }
 
-/* ---------- deadline cards (style "cards") or just the next one (style "fact") ---------- */
-function deadlines(n = 4, style = "cards") {
-  let shown = 0;
-  const items = all.map((m) => {
-    const hide = isPast(m.v) || shown >= n;
-    if (!hide) shown++;
-    const { a } = span(m.v);
-    const dt = day(a);
-    return `<li ${dattr(m.v)}${hide ? " hidden" : ""}><a href="${hrefOf(m.page)}"><time datetime="${a}"><b>${fmt(m.v, false)}</b> ${dt.getFullYear()} · 23:59 ${AOE_TAG}</time><span class="dc-track">${esc(shortTrack(m.track))}${m.round ? " · " + esc(m.round) : ""}</span><span class="dc-label">${esc(m.label)}</span></a></li>`;
-  });
-  return `<ol class="dcards ${style}" data-upcoming="${n}">${items.join("")}</ol><p class="none"${shown ? " hidden" : ""}>All submission deadlines have passed.</p>`;
-}
-
 /* ---------- logo, inlined so it stays crisp and can appear twice on a page ---------- */
 function logo(suffix = "a") {
   const file = conf.logo || "assets/logos/sigmod-pods-oval.svg";
@@ -191,8 +160,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("conf", conf);
   eleventyConfig.addGlobalData("nav", nav);
   eleventyConfig.addGlobalData("soon", soon);
-  eleventyConfig.addGlobalData("hubs", hubs);
-  eleventyConfig.addGlobalData("theme", THEME);
   eleventyConfig.addGlobalData("layout", "base.njk");
   // content/pages/calls/dates.md → /calls/dates/ ; content/pages/home.md → /
   eleventyConfig.addGlobalData("permalink", () => (data) => {
@@ -203,22 +170,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPreprocessor("shortcodes", "md", (data, content) => applyShortcodes(content));
 
   eleventyConfig.addFilter("inline", inline);
-  eleventyConfig.addFilter("groupOf", (url) => nav.all.find((g) => g.hrefs.includes(url) || (THEME_OPTS.hubs && g.hub === url)));
+  eleventyConfig.addFilter("groupOf", (url) => nav.all.find((g) => g.hrefs.includes(url)));
   eleventyConfig.addFilter("yearEm", (s) => esc(s).replace(/(\d{4})/, "<em>$1</em>"));
   eleventyConfig.addShortcode("upcoming", upcomingBox);
-  eleventyConfig.addShortcode("deadlines", deadlines);
-  // Give every <h2> an id, then list them ("On this page").
-  const slugify = (t) => t.replace(/<[^>]+>/g, "").toLowerCase().replace(/&[a-z]+;/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  eleventyConfig.addFilter("headingIds", (html = "") => String(html).replace(/<h2>([\s\S]*?)<\/h2>/g, (_, t) => `<h2 id="${slugify(t)}">${t}</h2>`));
-  eleventyConfig.addFilter("toc", (html = "") => [...String(html).matchAll(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g)].map((m) => ({ id: m[1], text: m[2].replace(/<[^>]+>/g, "") })));
-  // Previous / next page within the same menu group.
-  eleventyConfig.addFilter("neighbors", (url) => {
-    const g = nav.all.find((x) => x.hrefs.includes(url));
-    if (!g) return {};
-    const list = flat(g.items).filter((i) => !i.external);
-    const k = list.findIndex((i) => i.href === url);
-    return { prev: list[k - 1], next: list[k + 1], group: g };
-  });
   eleventyConfig.addShortcode("logo", logo);
   eleventyConfig.addShortcode("editPath", (inputPath) => inputPath.replace(/^\.\//, ""));
 
@@ -229,15 +183,6 @@ export default function (eleventyConfig) {
     eleventyComputed: { title: (data) => data.item.title },
     isSoon: true,
   });
-  // Optional index page for each menu group (designs with "hubs": true).
-  if (hubs.length)
-    eleventyConfig.addTemplate("virtual/hub.njk", `<ul class="hubcards">{% for c in hub.cards %}<li><a href="{{ c.href }}"><b>{{ c.title }}{% if c.external %} ↗{% endif %}</b>{% if c.isNew %} <span class="new">new</span>{% endif %}<span{% if not c.exists %} class="soonline"{% endif %}>{{ c.text }}</span></a></li>{% endfor %}</ul>`, {
-      pagination: { data: "hubs", size: 1, alias: "hub" },
-      permalink: (data) => data.hub.hub,
-      eleventyComputed: { title: (data) => data.hub.name },
-      isSoon: true,
-      isHub: true,
-    });
   eleventyConfig.addTemplate("virtual/404.njk", `<p>We couldn't find this page. Go back to the <a href="/">homepage</a>.</p>`, {
     permalink: "/404.html",
     title: "Page not found",
@@ -246,14 +191,13 @@ export default function (eleventyConfig) {
 
   // Theme files and shared assets.
   eleventyConfig.addPassthroughCopy({ assets: "assets" });
-  eleventyConfig.addPassthroughCopy({ [`themes/${THEME}/style.css`]: "assets/theme.css" });
-  eleventyConfig.addPassthroughCopy({ "themes/_shared/base.css": "assets/base.css" });
-  eleventyConfig.addPassthroughCopy({ "themes/_shared/site.js": "assets/site.js" });
-  eleventyConfig.addWatchTarget("themes/");
+  eleventyConfig.addPassthroughCopy({ "theme/style.css": "assets/style.css" });
+  eleventyConfig.addPassthroughCopy({ "theme/site.js": "assets/site.js" });
+  eleventyConfig.addWatchTarget("theme/");
   eleventyConfig.addWatchTarget("content/site.yml");
 
   return {
-    dir: { input: "content", includes: "../themes", layouts: `../themes/${THEME}`, output: "_site" },
+    dir: { input: "content", includes: "../theme", layouts: "../theme", output: "_site" },
     templateFormats: ["md", "njk"],
     markdownTemplateEngine: false,
     htmlTemplateEngine: "njk",

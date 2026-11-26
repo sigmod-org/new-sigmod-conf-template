@@ -1,12 +1,12 @@
-{%- import "_shared/macros.njk" as m -%}
+{%- import "macros.njk" as m -%}
 {%- set home = page.url == "/" -%}
 {%- set g = page.url | groupOf -%}
 <!doctype html>
 <html lang="en">
 <head>
-{% include "_shared/head.njk" %}
+{% include "head.njk" %}
 </head>
-<body class="theme-heritage">
+<body>
 <a class="skip" href="#main">Skip to content</a>
 {% if site.announcement %}<div class="announce"><div class="wrap">{{ site.announcement | inline | safe }}</div></div>{% endif %}
 
@@ -24,7 +24,7 @@
 <nav class="drawer" id="drawer" aria-label="Site"><div class="wrap">{{ m.drawer(nav.all, page.url, conf) }}</div></nav>
 
 <div class="banner{% if home %} tall{% endif %}">
-  <img src="/{{ conf.banner }}" alt="">
+  <img src="/{{ conf.banner }}" alt=""{% if conf.banner_position %} style="object-position: {{ conf.banner_position }}"{% endif %}>
   {% if conf.banner_credit %}<span class="cap">{{ conf.banner_credit }}</span>{% endif %}
 </div>
 
@@ -52,12 +52,13 @@
   </aside>
 </div>
 
-{% include "_shared/logobar.njk" %}
+{% include "logobar.njk" %}
 <footer class="foot">
   <div class="wrap">
     <div class="fl"><div><b>{{ conf.short_name }}</b><br>{{ conf.full_name }}<br>{{ conf.dates }} · {{ conf.location }}</div></div>
     <div class="fr">{{ m.foot_links(site) }}</div>
   </div>
+  {%- if conf.banner_credit %}<div class="wrap credit">{{ conf.banner_credit }}</div>{% endif %}
 </footer>
 </body>
 </html>

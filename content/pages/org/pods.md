@@ -2,6 +2,6 @@
 title: PODS Organizers
 ---
 
-The organizers of PODS 2028, the ACM Symposium on Principles of Database Systems.
+The PODS 2028 organizers have not been announced yet. The chairs below are last year's (PODS 2027), shown as placeholders.
 
 {{people: PODS}}

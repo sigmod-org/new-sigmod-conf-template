@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" role="img" aria-label="SIGMOD/PODS">
-  <defs><clipPath id="ov2-s"><circle cx="42" cy="40" r="36"/></clipPath></defs>
-  <circle cx="42" cy="40" r="36" fill="#1f4fa3"/>
-  <circle cx="82" cy="40" r="36" fill="#9a3412"/>
-  <circle cx="82" cy="40" r="36" fill="#3b2a5e" clip-path="url(#ov2-s)"/>
-  <text x="136" y="53" textLength="132" lengthAdjust="spacingAndGlyphs" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="36" fill="#1f4fa3">SIGMOD</text>
-  <text x="276" y="53" textLength="80" lengthAdjust="spacingAndGlyphs" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="36" fill="#9a3412">PODS</text>
-</svg>

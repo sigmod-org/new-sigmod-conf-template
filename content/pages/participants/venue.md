@@ -2,6 +2,6 @@
 title: Conference Venue
 ---
 
-SIGMOD/PODS 2028 takes place in **Seoul, South Korea**, on June 18–23, 2028.
+SIGMOD/PODS 2028 will be held at **COEX** in Seoul, Korea, on June 17–23, 2028.
 
-The conference venue will be announced here, together with hotel information and directions.
+Information on registration, accommodation, and travel will be posted on this website as it becomes available.

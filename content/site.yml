@@ -1,38 +1,32 @@
 # ─────────────────────────────────────────────────────────────
 #  SIGMOD/PODS conference site: settings for one year.
-#  Menus follow the 2026 site (2026.sigmod.org): five groups on the
-#  left, three on the right. Page text lives in content/pages/*.md.
-#  To hide a menu item until it is ready, put  #  in front of its line.
-#  A menu item whose page file does not exist yet shows "coming soon".
+#  Content follows 2028.sigmod.org (as of November 2026).
+#  Menus follow the 2026 site: five groups on the left, three on the right.
+#  Page text lives in content/pages/*.md.
+#  A menu item whose page file does not exist yet appears in gray italics
+#  and opens a "coming soon" page. To hide an item, put  #  in front of its line.
 # ─────────────────────────────────────────────────────────────
 
 conference:
   short_name: SIGMOD/PODS 2028
   year: 2028
   full_name: ACM SIGMOD/PODS International Conference on Management of Data
-  dates: June 18–23, 2028
-  start: 2028-06-18
+  dates: June 17–23, 2028
+  start: 2028-06-17
   end: 2028-06-23
-  location: Seoul, South Korea
-  venue: Venue to be announced
+  location: Seoul, Korea
+  venue: COEX
   register_link: "#"
   logo: assets/logos/sigmod-pods-oval.svg   # header logo (the footer always shows ACM and SIGMOD/PODS)
-  banner: assets/banner.svg   # replace with a photo of the host city, e.g. assets/banner.jpg
-  banner_credit: Illustration placeholder for a host-city photo
+  banner: assets/banner.jpg
+  banner_position: center 72%   # which part of the photo the banner shows
+  banner_credit: "Banner photo: Gwanghwamun, Gyeongbokgung Palace © Korea Heritage Service, KOGL Type 1."
   accent_color: "#a61e4d"   # one color per year
 
-announcement: "**SIGMOD/PODS 2028** will be held in **Seoul, South Korea**, on June 18–23, 2028. Calls for submissions will be posted here."
+announcement: "The **SIGMOD 2028 Call for Research Papers** is now available. The first submission deadline is January 17, 2027 (abstracts due January 10, 2027). [Read the call](/calls/sigmod-research/)"
 
 # Pages listed here are marked "new" in the menu.
-highlight: [news]
-
-# Shorter group names, used by designs with a top menu bar.
-short_names:
-  Special Events: Events
-  SIGMOD Program: SIGMOD
-  PODS Program: PODS
-  Participant Information: Attend
-  Calls for Submissions: Calls
+highlight: [news, calls/sigmod-research]
 
 left_menu:
   Welcome:
@@ -93,7 +87,7 @@ right_menu:
     ACM SIGMOD Online: https://sigmod.org/
   Calls for Submissions:
     Important Dates: calls/dates
-    SIGMOD Research Papers: calls/sigmod-research
+    SIGMOD Call for Research Papers: calls/sigmod-research
     PODS Research Papers: calls/pods-research
     SIGMOD Industrial Track: calls/industrial
     SIGMOD Demonstrations: calls/demos
@@ -103,77 +97,66 @@ right_menu:
     Doctoral Dissertation Award: https://sigmod.org/sigmod-awards/doctoral-dissertation-award/
 
 news:
-  - "SIGMOD/PODS 2028 will take place in **Seoul, South Korea**, on June 18–23, 2028."
-  - "The general chairs are **Wook-Shin Han** and **Kyuseok Shim**. The SIGMOD program chairs are **Yannis Velegrakis** and **Rachel Pottinger**."
+  - "**8 November 2026:** The [SIGMOD 2028 Call for Research Papers](/calls/sigmod-research/) is now available. The first submission deadline is January 17, 2027 (abstracts due January 10, 2027). See [Important Dates](/calls/dates/)."
 
 # Important dates. All deadlines are 23:59 AoE.
-# PLACEHOLDER: these are the 2027 deadlines moved forward one year, to show the layout.
-# Replace them with the 2028 dates, then delete dates_note and dates_note_short.
 # A track either has rounds (one date per round, in order) or a simple list.
-# A period is written  "2027-03-10 to 2027-03-17".
-dates_note: "**Placeholder dates.** These are the 2027 deadlines moved forward one year. The 2028 calls will be published here."
-dates_note_short: "Placeholder dates until the 2028 calls are out"
+# A period is written  "2027-03-16 to 2027-03-23".
 important_dates:
   - track: SIGMOD research papers
     page: calls/sigmod-research
     rounds: [Round 1, Round 2, Round 3, Round 4]
     dates:
-      Abstract & COI declaration: [2027-01-10, 2027-04-10, 2027-07-10, 2027-10-10]
-      Paper submission:           [2027-01-17, 2027-04-17, 2027-07-17, 2027-10-17]
-      Author feedback:            [2027-03-10 to 2027-03-17, 2027-06-10 to 2027-06-17, 2027-09-10 to 2027-09-17, 2027-12-10 to 2027-12-17]
-      Accept / reject / revise:   [2027-04-19, 2027-07-19, 2027-10-19, 2028-01-19]
-      Revised paper due:          [2027-05-19, 2027-08-19, 2027-11-19, 2028-02-19]
-      Final notification:         [2027-06-12, 2027-09-12, 2027-12-12, 2028-03-12]
-
-  - track: PODS research papers
-    page: calls/pods-research
-    rounds: [Cycle 1, Cycle 2]
-    dates:
-      Abstract submission:   [2027-05-23, 2027-12-03]
-      Full paper submission: [2027-05-30, 2027-12-10]
-      Rebuttal:              [2027-07-29 to 2027-08-01, 2028-01-26 to 2028-01-29]
-      Initial notification:  [2027-08-11, 2028-02-08]
-      Revision due:          [2027-08-25, 2028-02-22]
-      Final notification:    [2027-09-01, 2028-03-01]
-
-  - track: Industrial track
-    page: calls/industrial
-    dates:
-      Paper submission: 2027-11-24
-      Reviews released: 2028-01-26
-      Revision submission: 2028-02-23
-      Notification: 2028-03-04
-      Camera-ready: 2028-03-18
-
-  - track: Tutorials
-    page: calls/tutorials
-    dates:
-      Proposal submission: 2027-12-20
-      Notification: 2028-02-01
-
-  - track: Demonstrations
-    page: calls/demos
-    dates:
-      Submission: 2028-01-11
-      COI declaration: 2028-01-12
-      Notification: 2028-03-08
-      Camera-ready: 2028-04-01
+      Abstract submission & declaration of COIs: [2027-01-10, 2027-04-10, 2027-07-10, 2027-10-10]
+      Paper submission:                          [2027-01-17, 2027-04-17, 2027-07-17, 2027-10-17]
+      Author feedback phase:                     [2027-03-16 to 2027-03-23, 2027-06-14 to 2027-06-25, 2027-09-13 to 2027-09-20, 2027-12-14 to 2027-12-21]
+      Notification of accept/reject/revision:    [2027-04-25, 2027-07-28, 2027-10-23, 2028-01-23]
+      Revised paper submission:                  [2027-05-25, 2027-08-27, 2027-11-22, 2028-02-22]
+      Final notification of accept/reject:       [2027-06-18, 2027-09-20, 2027-12-16, 2028-03-17]
 
 # People, grouped by organizers page: Conference → org/conference, SIGMOD → org/sigmod, PODS → org/pods.
-# Write each person as "Name (Affiliation)". Photos: assets/people/<first-last>.jpg.
+# One person per line, in quotes: "Name (Affiliation, Country)". Photos: assets/people/<first-last>.jpg.
 people:
   Conference:
-    General Chairs: [Wook-Shin Han (POSTECH), Kyuseok Shim (Seoul National University)]
-    Web Chair: [Kyoungmin Kim (KAIST)]
+    SIGMOD General Chairs:
+      - "Wook-Shin Han (POSTECH, Korea)"
+      - "Kyuseok Shim (Seoul National University, Korea)"
+    Web/Information Chair:
+      - "Kyoungmin Kim (KAIST, Korea)"
   SIGMOD:
-    SIGMOD Program Chairs: [Yannis Velegrakis (Utrecht University), Rachel Pottinger (University of British Columbia)]
+    SIGMOD Program Chairs:
+      - "Rachel Pottinger (University of British Columbia, Canada)"
+      - "Yannis Velegrakis (Utrecht University, The Netherlands)"
+    SIGMOD Industrial Program Chairs:
+      - "Nesime Tatbul (MIT, USA)"
+      - "Jingren Zhou (Alibaba, China)"
+    SIGMOD Proceedings Chairs:
+      - "Odysseas Papapetrou (Eindhoven University of Technology, The Netherlands)"
+      - "Mostafa Milani (University of Western Ontario, Canada)"
+    SIGMOD Demonstration Chairs:
+      - "Fei Chiang (McMaster University, Canada)"
+      - "Alkis Simitsis (Athena Research Center, Greece)"
+      - "Hyungsoo Jung (Seoul National University, Korea)"
+    SIGMOD Tutorial Chairs:
+      - "Wolfgang Gatterbauer (Northeastern University, USA)"
+      - "Georgia Koutrika (Athena Research Center, Greece)"
+    SIGMOD Workshop Chairs:
+      - "Tilmann Rabl (Hasso Plattner Institute, Germany)"
+      - "Ashraf Aboulnaga (University of Texas at Arlington, USA)"
+    SIGMOD Panel Chairs:
+      - "AnHai Doan (University of Wisconsin-Madison, USA)"
+      - "Wolfgang Lehner (TU Dresden, Germany)"
+    SIGMOD Junior Researcher Symposium Chair:
+      - "Kijung Shin (KAIST, Korea)"
   PODS:
-    # PLACEHOLDER: the 2027 PODS chairs. Replace with the 2028 PODS chairs and remove "(placeholder, 2027)".
-    PODS General Chair (placeholder, 2027): [Yufei Tao (Chinese University of Hong Kong)]
-    PODS Program Chair (placeholder, 2027): [Dan Olteanu (University of Zurich)]
+    # PLACEHOLDER: the 2027 PODS chairs (2028.sigmod.org lists no PODS organizers yet).
+    PODS General Chair (placeholder, 2027):
+      - "Yufei Tao (Chinese University of Hong Kong)"
+    PODS Program Chair (placeholder, 2027):
+      - "Dan Olteanu (University of Zurich)"
 
 # Roles shown in the homepage "Conference chairs" block (matched by the start of the role name).
-homepage_chairs: [General Chairs, SIGMOD Program Chairs, PODS General Chair, PODS Program Chair]
+homepage_chairs: [SIGMOD General Chairs, SIGMOD Program Chairs, PODS General Chair, PODS Program Chair]
 
 # Sponsors by tier: "Name: https://link". Empty tiers are not shown.
 sponsors:
@@ -184,4 +167,3 @@ sponsors:
 footer:
   social:
     X: https://x.com/SIGMODConf
-    LinkedIn: "#"

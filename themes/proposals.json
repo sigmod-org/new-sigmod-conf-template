@@ -1,7 +1,0 @@
-[
-  { "id": "heritage", "name": "Heritage", "summary": "The 2026 site, cleaned up: banner, left menu, page, right menu. Laptops stack both menus on the left; phones get a Menu button." },
-  { "id": "masthead", "name": "Masthead", "summary": "Closest to sigmod.org: one menu bar with dropdowns, a 2024-style information bar under the banner, and the current section's pages on the left of every page." },
-  { "id": "handbook", "name": "Handbook", "summary": "Like conference documentation: one sidebar with all eight groups as folding lists and a filter box, plus an 'On this page' list and previous/next links." },
-  { "id": "landing", "name": "Landing", "summary": "The homepage leads with when, where and the next deadlines, then every page grouped in cards. Inner pages show their group's pages as buttons." },
-  { "id": "atlas", "name": "Atlas", "summary": "One menu bar that opens the whole 2026 site map at once, an index page for each of the eight sections, and an 'On this page' list on long pages.", "hubs": true }
-]
