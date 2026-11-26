@@ -20,7 +20,7 @@ See all [organizers](/org/conference/).
 
 ## SIGMOD/PODS 2028 Anti-Harassment Policy
 
-SIGMOD/PODS 2028 adheres to the [ACM Policy Against Harassment](https://www.acm.org/special-interest-groups/volunteer-resources/officers-manual/policy-against-discrimination-and-harassment). Any participant who experiences unacceptable behavior may contact any current member of the [SIGMOD Executive Committee](https://sigmod.org/about-sigmod/) and the [PODS Executive Committee](https://sigmod.org/pods/pods-organization/) or [DBCares](http://www.sigmod2020.org/dbcares.shtml). Please be assured that if you approach us, your concerns will be kept in strict confidence, and we will consult with you on any actions taken.
+SIGMOD/PODS 2028 adheres to the [ACM Policy Against Harassment](https://www.acm.org/special-interest-groups/volunteer-resources/officers-manual/policy-against-discrimination-and-harassment). Any participant who experiences unacceptable behavior may contact any current member of the [SIGMOD Executive Committee](https://sigmod.org/about-sigmod/) and the [PODS Executive Committee](https://sigmod.org/pods/pods-organization/) or [DBCares](https://dbdni.github.io/pages/dbcares). Please be assured that if you approach us, your concerns will be kept in strict confidence, and we will consult with you on any actions taken.
 
 ## SIGMOD/PODS 2028 Privacy Policy
 

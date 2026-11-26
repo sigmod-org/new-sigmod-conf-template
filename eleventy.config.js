@@ -139,7 +139,7 @@ function upcomingBox(n = 4, title = "Upcoming dates") {
   const items = all.map((m) => {
     const hide = isPast(m.v) || shown >= n;
     if (!hide) shown++;
-    return `<li class="${dcls(m.v)}" ${dattr(m.v)}${hide ? " hidden" : ""}><span><a href="${hrefOf(m.page)}">${esc(shortTrack(m.track))}</a>${m.round ? " · " + esc(m.round) : ""}<br>${esc(m.label)}</span><time datetime="${span(m.v).a}">${fmt(m.v, false)} ${AOE_TAG}</time></li>`;
+    return `<li class="${dcls(m.v)}" ${dattr(m.v)}${hide ? " hidden" : ""}><span><span class="nowrap"><a href="${hrefOf(m.page)}">${esc(shortTrack(m.track))}</a>${m.round ? " · " + esc(m.round) : ""}</span><br>${esc(m.label)}</span><time datetime="${span(m.v).a}">${fmt(m.v, false)} ${AOE_TAG}</time></li>`;
   });
   const note = site.dates_note ? `<p class="small upnote">${esc(site.dates_note_short || "Placeholder dates")}</p>` : "";
   return `<div class="upbox"><h2>${esc(title)}</h2>${note}<ul class="dlist compact" data-upcoming="${n}">${items.join("")}</ul><p class="none"${shown ? " hidden" : ""}>All submission deadlines have passed.</p><p class="small"><a href="/calls/dates/">All important dates</a> · 23:59 AoE</p></div>`;
