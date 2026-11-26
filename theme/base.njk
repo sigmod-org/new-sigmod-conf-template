@@ -23,7 +23,7 @@
 </header>
 <nav class="drawer" id="drawer" aria-label="Site"><div class="wrap">{{ m.drawer(nav.all, page.url, conf) }}</div></nav>
 
-<div class="banner{% if home %} tall{% endif %}">
+<div class="banner">
   <img src="/{{ conf.banner }}" alt=""{% if conf.banner_position %} style="object-position: {{ conf.banner_position }}"{% endif %}>
   {% if conf.banner_credit %}<span class="cap">{{ conf.banner_credit }}</span>{% endif %}
 </div>
