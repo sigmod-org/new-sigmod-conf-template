@@ -49,7 +49,6 @@ const fmt = (v, withYear = true) => {
   if (a === b) return `${MON[x.getMonth()]}\u00a0${x.getDate()}${yr}`;
   return `${MON[x.getMonth()]}\u00a0${x.getDate()}–${x.getMonth() === y.getMonth() ? "" : MON[y.getMonth()] + "\u00a0"}${y.getDate()}${yr}`;
 };
-const AOE_TAG = `<abbr class="aoe" title="23:59 Anywhere on Earth (UTC−12)">AoE</abbr>`;
 const isPast = (v) => new Date(span(v).b + "T23:59:00" + AOE) < TODAY;
 const all = [];
 for (const t of site.important_dates || [])
@@ -65,14 +64,14 @@ const shortTrack = (t) => t.replace(" research papers", "").replace(" track", ""
 function datesFor(t) {
   const rows = Object.entries(t.dates);
   if (!t.rounds)
-    return `<ul class="dlist">${rows.map(([l, v]) => `<li class="${dcls(v)}" ${dattr(v)}><span>${esc(l)}</span><time datetime="${span(v).a}">${fmt(v)} ${AOE_TAG}</time></li>`).join("")}</ul>`;
+    return `<ul class="dlist">${rows.map(([l, v]) => `<li class="${dcls(v)}" ${dattr(v)}><span>${esc(l)}</span><time datetime="${span(v).a}">${fmt(v)}</time></li>`).join("")}</ul>`;
   const table = `<div class="tscroll wide-only"><table class="dates"><thead><tr><th></th>${t.rounds.map((r) => `<th scope="col">${esc(r)}</th>`).join("")}</tr></thead><tbody>${rows
-    .map(([l, vals]) => `<tr><th scope="row">${esc(l)}</th>${vals.map((v) => `<td class="${dcls(v)}" ${dattr(v)}><span class="dd">${fmt(v)}</span> ${AOE_TAG}</td>`).join("")}</tr>`)
+    .map(([l, vals]) => `<tr><th scope="row">${esc(l).replace(/\//g, "/<wbr>")}</th>${vals.map((v) => `<td class="${dcls(v)}" ${dattr(v)}><span class="dd">${span(v).a === span(v).b ? fmt(v).replace(", ", ",\u00a0") : fmt(v)}</span></td>`).join("")}</tr>`)
     .join("")}</tbody></table></div>`;
   const firstOpen = t.rounds.findIndex((_, i) => rows.some(([, vals]) => !isPast(vals[i])));
   const lists = `<div class="narrow-only rounds">${t.rounds
     .map((r, i) => `<details class="round"${i === firstOpen ? " open" : ""}><summary>${esc(r)}<small class="closed">closed</small></summary><ul class="dlist">${rows
-      .map(([l, vals]) => `<li class="${dcls(vals[i])}" ${dattr(vals[i])}><span>${esc(l)}</span><time datetime="${span(vals[i]).a}">${fmt(vals[i])} ${AOE_TAG}</time></li>`)
+      .map(([l, vals]) => `<li class="${dcls(vals[i])}" ${dattr(vals[i])}><span>${esc(l)}</span><time datetime="${span(vals[i]).a}">${fmt(vals[i])}</time></li>`)
       .join("")}</ul></details>`)
     .join("")}</div>`;
   return table + lists;
@@ -139,7 +138,7 @@ function upcomingBox(n = 4, title = "Upcoming dates") {
   const items = all.map((m) => {
     const hide = isPast(m.v) || shown >= n;
     if (!hide) shown++;
-    return `<li class="${dcls(m.v)}" ${dattr(m.v)}${hide ? " hidden" : ""}><span><span class="nowrap"><a href="${hrefOf(m.page)}">${esc(shortTrack(m.track))}</a>${m.round ? " · " + esc(m.round) : ""}</span><br>${esc(m.label)}</span><time datetime="${span(m.v).a}">${fmt(m.v, false)} ${AOE_TAG}</time></li>`;
+    return `<li class="${dcls(m.v)}" ${dattr(m.v)}${hide ? " hidden" : ""}><span><span class="nowrap"><a href="${hrefOf(m.page)}">${esc(shortTrack(m.track))}</a>${m.round ? " · " + esc(m.round) : ""}</span><br>${esc(m.label)}</span><time datetime="${span(m.v).a}">${fmt(m.v, false)}</time></li>`;
   });
   const note = site.dates_note ? `<p class="small upnote">${esc(site.dates_note_short || "Placeholder dates")}</p>` : "";
   return `<div class="upbox"><h2>${esc(title)}</h2>${note}<ul class="dlist compact" data-upcoming="${n}">${items.join("")}</ul><p class="none"${shown ? " hidden" : ""}>All submission deadlines have passed.</p><p class="small"><a href="/calls/dates/">All important dates</a> · 23:59 AoE</p></div>`;

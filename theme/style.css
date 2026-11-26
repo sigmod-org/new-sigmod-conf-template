@@ -133,13 +133,11 @@ a.is-soon { font-style: italic; color: #9aa1ab !important; }
 a.is-soon:hover { color: var(--muted) !important; }
 .foot a.is-soon, .utility a.is-soon { color: #8797b5 !important; }
 
-/* "AoE" next to every deadline (title gives 23:59 Anywhere on Earth, UTC−12) */
-abbr.aoe { font-size: .76em; font-weight: 500; letter-spacing: .03em; color: var(--muted); text-decoration: none; cursor: help; margin-left: 1px; }
-.past abbr.aoe { color: inherit; }
+/* Round tables: a long date may wrap before the year */
 table.dates td { white-space: normal; }
 table.dates td .dd { white-space: normal; }
-table.dates th, table.dates td { padding-left: 10px; padding-right: 10px; }
-table.dates tbody th { min-width: 128px; }
+table.dates th, table.dates td { padding-left: 8px; padding-right: 8px; }
+table.dates tbody th { min-width: 112px; }
 
 /* Organizers with photos ({{people}}); the homepage {{chairs}} block stays text-only */
 .org-role { margin: 0 0 26px; }
@@ -243,3 +241,10 @@ table.dates tbody th { min-width: 128px; }
 .prose { overflow-wrap: break-word; }
 .prose td, .prose th { overflow-wrap: anywhere; }
 .nowrap { white-space: nowrap; }
+table.dates td, table.dates th { overflow-wrap: normal; }
+/* The round table needs about 600px; in a narrower column, show the round-by-round lists instead */
+.dates-block { container-type: inline-size; }
+@container (max-width: 599px) {
+  .dates-block .wide-only { display: none; }
+  .dates-block .narrow-only { display: block; }
+}
